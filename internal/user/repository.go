@@ -13,19 +13,20 @@ type InMemoryRepo struct {
 var Repository Repo = &InMemoryRepo{store: map[string]*User{}}
 
 func (repo *InMemoryRepo) FindByUsername(username string) *User {
-	for _, user := range repo.store {
-		if user.Username == username {
-			return user
-		}
+	user, ok := repo.store[username]
+	if !ok {
+		return &User{}
 	}
 
-	return &User{}
+	return user
 }
 
 func (repo *InMemoryRepo) IsExists(username string) bool {
-	return repo.FindByUsername(username) != nil
+	_, ok := repo.store[username]
+
+	return ok
 }
 
 func (repo *InMemoryRepo) Save(user *User) {
-	repo.store[user.Id] = user
+	repo.store[user.Username] = user
 }
