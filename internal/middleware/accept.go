@@ -1,16 +1,13 @@
 package middleware
 
-import "net/http"
+import (
+	"github.com/gofiber/fiber/v2"
+)
 
-func Accept(next http.Handler) http.Handler {
-	fn := func(resp http.ResponseWriter, req *http.Request) {
-		if req.Header.Get("Accept") != "application/json" {
-			http.Error(resp, "Not acceptable content-type", http.StatusNotAcceptable)
-			return
-		}
-
-		next.ServeHTTP(resp, req)
+func Accept(ctx *fiber.Ctx) error {
+	if ctx.Is("json") {
+		return ctx.Next()
 	}
 
-	return http.HandlerFunc(fn)
+	return fiber.NewError(fiber.StatusNotAcceptable, "Not acceptable content-type")
 }

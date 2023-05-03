@@ -1,21 +1,23 @@
 package main
 
 import (
-	"github.com/gorilla/mux"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/iggyster/lets-go-chat/internal/handler"
 	"github.com/iggyster/lets-go-chat/internal/middleware"
 	"log"
-	"net/http"
 )
 
 func main() {
-	var router = mux.NewRouter()
+	app := fiber.New()
 
-	router.HandleFunc("/user", handler.Register).Methods(http.MethodPost)
-	router.HandleFunc("/user/login", handler.Auth).Methods(http.MethodPost)
-	router.Use(middleware.Logging)
-	router.Use(middleware.Recover)
-	router.Use(middleware.Accept)
+	app.Use(middleware.Accept)
+	app.Use(logger.New())
+	app.Use(recover.New())
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	app.Post("/user", handler.Register)
+	app.Post("/user/login", handler.Auth)
+
+	log.Fatal(app.Listen(":8080"))
 }

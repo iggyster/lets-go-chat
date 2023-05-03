@@ -1,10 +1,5 @@
 package handler
 
-import (
-	"encoding/json"
-	"net/http"
-)
-
 type Errors struct {
 	Errors []*Error `json:"errors"`
 }
@@ -21,14 +16,4 @@ func (errors *Errors) AddError(field, message, detail string) {
 
 func (errors *Errors) Count() int {
 	return len(errors.Errors)
-}
-
-func SendErrors(resp http.ResponseWriter, errors Errors, status int) {
-	resp.Header().Set("Content-Type", "application/json")
-	resp.WriteHeader(status)
-
-	err := json.NewEncoder(resp).Encode(errors)
-	if err != nil {
-		http.Error(resp, "Failed encoding", http.StatusInternalServerError)
-	}
 }

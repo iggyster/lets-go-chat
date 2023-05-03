@@ -1,9 +1,8 @@
 package handler
 
 import (
-	"encoding/json"
+	"github.com/gofiber/fiber/v2"
 	"github.com/iggyster/lets-go-chat/internal/user"
-	"net/http"
 )
 
 type RegisterData struct {
@@ -16,30 +15,20 @@ type RegisterResource struct {
 	UserName string `json:"userName"`
 }
 
-func Register(resp http.ResponseWriter, req *http.Request) {
+func Register(ctx *fiber.Ctx) error {
 	data := RegisterData{}
-	err := json.NewDecoder(req.Body).Decode(&data)
-	if err != nil {
-		http.Error(resp, "Failed decoding", http.StatusInternalServerError)
-		return
+	if err := ctx.BodyParser(&data); err != nil {
+		return err
 	}
 
 	if errors := validate(&data); errors.Count() > 0 {
-		SendErrors(resp, errors, http.StatusBadRequest)
-		return
+		return ctx.Status(fiber.StatusBadRequest).JSON(errors)
 	}
 
-	u := user.New(data.Username, data.Password)
+	usr := user.New(data.Username, data.Password)
+	user.Repository.Save(usr)
 
-	user.Repository.Save(u)
-
-	resp.Header().Set("Content-Type", "application/json")
-	resp.WriteHeader(http.StatusOK)
-
-	err = json.NewEncoder(resp).Encode(RegisterResource{u.Id, u.Username})
-	if err != nil {
-		return
-	}
+	return ctx.Status(fiber.StatusOK).JSON(RegisterResource{usr.Id, usr.Username})
 }
 
 func validate(data *RegisterData) Errors {
