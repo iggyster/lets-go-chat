@@ -22,8 +22,8 @@ func Auth(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	usr := user.Repository.FindByUsername(data.Username)
-	if usr != nil && !hasher.CheckPasswordHash(data.Password, usr.Password) {
+	usr, err := user.Repository.FindByUsername(data.Username)
+	if err != nil && !hasher.CheckPasswordHash(data.Password, usr.Password) {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid credentials")
 	}
 
