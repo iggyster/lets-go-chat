@@ -7,6 +7,7 @@ import (
 
 type Repo interface {
 	FindByUsername(username string) (*User, error)
+	FindByToken(toekn string) *User
 	IsExists(username string) bool
 	Save(user *User)
 }
@@ -16,6 +17,7 @@ type InMemoryRepo struct {
 }
 
 var Repository Repo = &InMemoryRepo{store: sync.Map{}}
+var ActiveConn = sync.Map{}
 
 func (repo *InMemoryRepo) FindByUsername(username string) (*User, error) {
 	val, ok := repo.store.Load(username)
@@ -29,6 +31,22 @@ func (repo *InMemoryRepo) FindByUsername(username string) (*User, error) {
 	}
 
 	return usr, nil
+}
+
+func (repo *InMemoryRepo) FindByToken(token string) *User {
+	var usr *User
+
+	repo.store.Range(func(key, value any) bool {
+		temp, ok := value.(*User)
+		if ok && temp.Token == token {
+			usr = temp
+			return false
+		}
+
+		return true
+	})
+
+	return usr
 }
 
 func (repo *InMemoryRepo) IsExists(username string) bool {

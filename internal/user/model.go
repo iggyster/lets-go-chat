@@ -6,7 +6,11 @@ import (
 )
 
 type User struct {
-	Id, Username, Password string
+	Id, Username, Password, Token string
+}
+
+func (usr *User) SetToken(token string) {
+	usr.Token = token
 }
 
 func New(username, password string) *User {

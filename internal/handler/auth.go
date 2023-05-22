@@ -1,10 +1,14 @@
 package handler
 
 import (
+	"fmt"
+	"time"
+
+	"github.com/iggyster/lets-go-chat/pkg/tokenGenerator"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/iggyster/lets-go-chat/internal/user"
 	"github.com/iggyster/lets-go-chat/pkg/hasher"
-	"time"
 )
 
 type LoginData struct {
@@ -27,9 +31,17 @@ func Auth(ctx *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid credentials")
 	}
 
+	token, err := tokenGenerator.Generate(16)
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, "Token generation failed")
+	}
+
+	usr.SetToken(token)
+	user.Repository.Save(usr)
+
 	ctx.Append("X-Rate-Limit", "5000")
 	ctx.Append("X-Expires-After", time.Now().Add(time.Hour*1).UTC().String())
 	ctx.Append("Content-Type", "application/json")
 
-	return ctx.Status(fiber.StatusOK).JSON(LoginResource{Url: "ws://fancy-chat.io/ws&token=one-time-token"})
+	return ctx.Status(fiber.StatusOK).JSON(LoginResource{Url: fmt.Sprintf("ws://localhost:8080/ws?token=%v", token)})
 }
