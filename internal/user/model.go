@@ -6,7 +6,10 @@ import (
 )
 
 type User struct {
-	Id, Username, Password, Token string
+	Id       string `json:"id"`
+	Username string `json:"username"`
+	Password string `json:"-"`
+	Token    string `json:"-"`
 }
 
 func (usr *User) SetToken(token string) {
