@@ -17,7 +17,6 @@ type InMemoryRepo struct {
 }
 
 var Repository Repo = &InMemoryRepo{store: sync.Map{}}
-var ActiveConn = sync.Map{}
 
 func (repo *InMemoryRepo) FindByUsername(username string) (*User, error) {
 	val, ok := repo.store.Load(username)
