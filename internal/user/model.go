@@ -16,6 +16,10 @@ func (usr *User) SetToken(token string) {
 	usr.Token = token
 }
 
+func (usr *User) RevokeToken() {
+	usr.Token = ""
+}
+
 func New(username, password string) *User {
 	hashed, _ := hasher.HashPassword(password)
 

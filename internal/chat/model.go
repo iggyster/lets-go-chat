@@ -7,34 +7,34 @@ import (
 )
 
 var (
-	c    IChat
+	c    UserChat
 	once sync.Once
 )
 
-type IChat interface {
+type UserChat interface {
 	AddUser(usr *user.User)
 	GetUsers() []*user.User
-	IsUserActivated(token string) bool
-	RevokeToken(token string)
+	IsUserActivated(id string) bool
+	DisconnectUser(usr *user.User)
 }
 type Chat struct {
-	ActiveUsers sync.Map
+	sync.Map
 }
 
-func New() IChat {
+func New() UserChat {
 	once.Do(func() {
-		c = &Chat{ActiveUsers: sync.Map{}}
+		c = &Chat{}
 	})
 
 	return c
 }
 
 func (chat *Chat) AddUser(usr *user.User) {
-	chat.ActiveUsers.Store(usr.Token, usr)
+	chat.Store(usr.Id, usr)
 }
 
-func (chat *Chat) IsUserActivated(token string) bool {
-	_, ok := chat.ActiveUsers.Load(token)
+func (chat *Chat) IsUserActivated(id string) bool {
+	_, ok := chat.Load(id)
 
 	return ok
 }
@@ -42,7 +42,7 @@ func (chat *Chat) IsUserActivated(token string) bool {
 func (chat *Chat) GetUsers() []*user.User {
 	var users []*user.User
 
-	chat.ActiveUsers.Range(func(key, value any) bool {
+	chat.Range(func(key, value any) bool {
 		if usr, ok := value.(*user.User); ok {
 			users = append(users, usr)
 		}
@@ -53,6 +53,6 @@ func (chat *Chat) GetUsers() []*user.User {
 	return users
 }
 
-func (chat *Chat) RevokeToken(token string) {
-	chat.ActiveUsers.Delete(token)
+func (chat *Chat) DisconnectUser(usr *user.User) {
+	chat.Delete(usr.Id)
 }

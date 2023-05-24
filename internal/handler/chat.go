@@ -30,7 +30,9 @@ func StartChat(conn *websocket.Conn) {
 		return
 	}
 
-	if !c.IsUserActivated(token) {
+	usr.RevokeToken()
+
+	if !c.IsUserActivated(usr.Id) {
 		c.AddUser(usr)
 	}
 
@@ -38,14 +40,14 @@ func StartChat(conn *websocket.Conn) {
 		mt, msg, err := conn.ReadMessage()
 		if err != nil {
 			log.Println("read:", err)
-			c.RevokeToken(token)
+			c.DisconnectUser(usr)
 			break
 		}
 		log.Printf("recv: %s", msg)
 		err = conn.WriteMessage(mt, msg)
 		if err != nil {
 			log.Println("write:", err)
-			c.RevokeToken(token)
+			c.DisconnectUser(usr)
 			break
 		}
 	}
