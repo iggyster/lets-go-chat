@@ -39,7 +39,6 @@ func Auth(ctx *fiber.Ctx) error {
 
 	ctx.Append("X-Rate-Limit", "5000")
 	ctx.Append("X-Expires-After", time.Now().Add(time.Hour*1).UTC().String())
-	ctx.Append("Content-Type", "application/json")
 
 	return ctx.Status(fiber.StatusOK).JSON(LoginResource{Url: fmt.Sprintf("ws://localhost:8080/ws?token=%v", token)})
 }
