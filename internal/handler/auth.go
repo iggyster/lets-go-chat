@@ -2,13 +2,11 @@ package handler
 
 import (
 	"fmt"
-	"time"
-
-	"github.com/iggyster/lets-go-chat/pkg/tokenGenerator"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/iggyster/lets-go-chat/internal/user"
 	"github.com/iggyster/lets-go-chat/pkg/hasher"
+	"github.com/iggyster/lets-go-chat/pkg/tokengenerator"
+	"time"
 )
 
 type LoginData struct {
@@ -31,7 +29,7 @@ func Auth(ctx *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid credentials")
 	}
 
-	token, err := tokenGenerator.Generate(16)
+	token, err := tokengenerator.Generate(16)
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, "Token generation failed")
 	}
