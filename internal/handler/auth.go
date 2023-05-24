@@ -2,11 +2,12 @@ package handler
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/iggyster/lets-go-chat/internal/user"
 	"github.com/iggyster/lets-go-chat/pkg/hasher"
 	"github.com/iggyster/lets-go-chat/pkg/tokengenerator"
-	"time"
 )
 
 type LoginData struct {
@@ -25,7 +26,7 @@ func Auth(ctx *fiber.Ctx) error {
 	}
 
 	usr, err := user.Repository.FindByUsername(data.Username)
-	if err != nil && !hasher.CheckPasswordHash(data.Password, usr.Password) {
+	if err != nil || !hasher.CheckPasswordHash(data.Password, usr.Password) {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid credentials")
 	}
 
