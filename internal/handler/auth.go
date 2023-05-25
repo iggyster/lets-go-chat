@@ -3,11 +3,11 @@ package handler
 import (
 	"fmt"
 	"time"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/iggyster/lets-go-chat/internal/user"
 	"github.com/iggyster/lets-go-chat/pkg/hasher"
 	"github.com/iggyster/lets-go-chat/pkg/tokengenerator"
+
 )
 
 type LoginData struct {
