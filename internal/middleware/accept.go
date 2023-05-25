@@ -5,6 +5,7 @@ import (
 )
 
 func Accept(ctx *fiber.Ctx) error {
+	//TODO exclude ws
 	if ctx.Is("json") {
 		return ctx.Next()
 	}
