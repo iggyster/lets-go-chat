@@ -13,13 +13,13 @@ type Repo interface {
 }
 
 type InMemoryRepo struct {
-	store sync.Map
+	sync.Map
 }
 
-var Repository Repo = &InMemoryRepo{store: sync.Map{}}
+var Repository Repo = &InMemoryRepo{}
 
 func (repo *InMemoryRepo) FindByUsername(username string) (*User, error) {
-	val, ok := repo.store.Load(username)
+	val, ok := repo.Load(username)
 	if !ok {
 		return nil, fmt.Errorf("no user found")
 	}
@@ -35,7 +35,7 @@ func (repo *InMemoryRepo) FindByUsername(username string) (*User, error) {
 func (repo *InMemoryRepo) FindByToken(token string) *User {
 	var usr *User
 
-	repo.store.Range(func(key, value any) bool {
+	repo.Range(func(key, value any) bool {
 		temp, ok := value.(*User)
 		if ok && temp.Token == token {
 			usr = temp
@@ -49,11 +49,11 @@ func (repo *InMemoryRepo) FindByToken(token string) *User {
 }
 
 func (repo *InMemoryRepo) IsExists(username string) bool {
-	_, ok := repo.store.Load(username)
+	_, ok := repo.Load(username)
 
 	return ok
 }
 
 func (repo *InMemoryRepo) Save(usr *User) {
-	repo.store.Store(usr.Username, usr)
+	repo.Store(usr.Username, usr)
 }

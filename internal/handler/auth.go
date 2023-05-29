@@ -30,10 +30,7 @@ func Auth(ctx *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid credentials")
 	}
 
-	token, err := tokengenerator.Generate(16)
-	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Token generation failed")
-	}
+	token := tokengenerator.Generate(16)
 
 	usr.SetToken(token)
 	user.Repository.Save(usr)

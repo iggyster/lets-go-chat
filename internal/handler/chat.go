@@ -1,11 +1,10 @@
 package handler
 
 import (
-	"log"
-
 	"github.com/gofiber/websocket/v2"
 	"github.com/iggyster/lets-go-chat/internal/chat"
 	"github.com/iggyster/lets-go-chat/internal/user"
+	"log"
 )
 
 func StartChat(conn *websocket.Conn) {
