@@ -7,3 +7,4 @@ This a placeholder for the future Golang project. The project is under the devel
 ### Import
 
 To import Hasher package: `go get github.com/iggyster/lets-go-chat/pkg/hasher`
+To import Tokengen package: `go get github.com/iggyster/lets-go-chat/pkg/tokengen`
