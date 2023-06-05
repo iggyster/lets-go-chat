@@ -19,15 +19,15 @@ import (
 )
 
 func TestAuth(t *testing.T) {
+	app := fiber.New()
+	app.Post("/user/login", handler.Auth)
+
 	usr := user.New("test", "pass")
 	user.Repository.Save(usr)
 
 	jsonBody := []byte(`{"userName": "test", "password": "pass"}`)
 	req := httptest.NewRequest(http.MethodPost, "/user/login", bytes.NewReader(jsonBody))
 	req.Header.Add("Content-Type", "application/json")
-
-	app := fiber.New()
-	router.Init(app)
 
 	resp, _ := app.Test(req)
 	assert.Equal(t, http.StatusOK, resp.StatusCode)

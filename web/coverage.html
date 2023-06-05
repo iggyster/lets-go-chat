@@ -57,27 +57,17 @@
 				
 				<option value="file0">github.com/iggyster/lets-go-chat/internal/chat/model.go (100.0%)</option>
 				
-				<option value="file1">github.com/iggyster/lets-go-chat/internal/handler/auth.go (100.0%)</option>
+				<option value="file1">github.com/iggyster/lets-go-chat/internal/middleware/accept.go (100.0%)</option>
 				
-				<option value="file2">github.com/iggyster/lets-go-chat/internal/handler/chat.go (0.0%)</option>
+				<option value="file2">github.com/iggyster/lets-go-chat/internal/middleware/boot.go (100.0%)</option>
 				
-				<option value="file3">github.com/iggyster/lets-go-chat/internal/handler/error.go (100.0%)</option>
+				<option value="file3">github.com/iggyster/lets-go-chat/internal/user/model.go (100.0%)</option>
 				
-				<option value="file4">github.com/iggyster/lets-go-chat/internal/handler/register.go (100.0%)</option>
+				<option value="file4">github.com/iggyster/lets-go-chat/internal/user/repository.go (94.4%)</option>
 				
-				<option value="file5">github.com/iggyster/lets-go-chat/internal/handler/users.go (0.0%)</option>
+				<option value="file5">github.com/iggyster/lets-go-chat/pkg/hasher/hasher.go (100.0%)</option>
 				
-				<option value="file6">github.com/iggyster/lets-go-chat/internal/middleware/accept.go (100.0%)</option>
-				
-				<option value="file7">github.com/iggyster/lets-go-chat/internal/middleware/boot.go (100.0%)</option>
-				
-				<option value="file8">github.com/iggyster/lets-go-chat/internal/user/model.go (100.0%)</option>
-				
-				<option value="file9">github.com/iggyster/lets-go-chat/internal/user/repository.go (94.4%)</option>
-				
-				<option value="file10">github.com/iggyster/lets-go-chat/pkg/hasher/hasher.go (100.0%)</option>
-				
-				<option value="file11">github.com/iggyster/lets-go-chat/pkg/tokengenerator/tokengenerator.go (100.0%)</option>
+				<option value="file6">github.com/iggyster/lets-go-chat/pkg/tokengenerator/tokenGenerator.go (100.0%)</option>
 				
 				</select>
 			</div>
@@ -151,207 +141,7 @@ func (chat *Chat) DisconnectUser(usr *user.User) <span class="cov8" title="1">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file1" style="display: none">package handler
-
-import (
-        "fmt"
-        "time"
-
-        "github.com/gofiber/fiber/v2"
-        "github.com/iggyster/lets-go-chat/internal/user"
-        "github.com/iggyster/lets-go-chat/pkg/hasher"
-        "github.com/iggyster/lets-go-chat/pkg/tokengenerator"
-)
-
-type LoginData struct {
-        Username string `json:"userName"`
-        Password string `json:"password"`
-}
-
-type LoginResource struct {
-        Url string `json:"url"`
-}
-
-func Auth(ctx *fiber.Ctx) error <span class="cov8" title="1">{
-        data := LoginData{}
-        if err := ctx.BodyParser(&amp;data); err != nil </span><span class="cov8" title="1">{
-                return err
-        }</span>
-
-        <span class="cov8" title="1">usr, err := user.Repository.FindByUsername(data.Username)
-        if err != nil || !hasher.CheckPasswordHash(data.Password, usr.Password) </span><span class="cov8" title="1">{
-                return fiber.NewError(fiber.StatusBadRequest, "Invalid credentials")
-        }</span>
-
-        <span class="cov8" title="1">token := tokengenerator.Generate(16)
-
-        usr.SetToken(token)
-        user.Repository.Save(usr)
-
-        ctx.Append("X-Rate-Limit", "5000")
-        ctx.Append("X-Expires-After", time.Now().Add(time.Hour*1).UTC().String())
-
-        return ctx.Status(fiber.StatusOK).JSON(LoginResource{Url: fmt.Sprintf("ws://localhost:8080/ws?token=%v", token)})</span>
-}
-</pre>
-		
-		<pre class="file" id="file2" style="display: none">package handler
-
-import (
-        "github.com/gofiber/websocket/v2"
-        "github.com/iggyster/lets-go-chat/internal/chat"
-        "github.com/iggyster/lets-go-chat/internal/user"
-        "log"
-)
-
-func StartChat(conn *websocket.Conn) <span class="cov0" title="0">{
-        defer func() </span><span class="cov0" title="0">{
-                err := conn.Close()
-                if err != nil </span><span class="cov0" title="0">{
-                        log.Fatalf("failed to close ws connection")
-                }</span>
-        }()
-
-        <span class="cov0" title="0">c := chat.New()
-
-        token := conn.Query("token")
-        if token == "" </span><span class="cov0" title="0">{
-                log.Println("failed attemp to connect without token")
-                return
-        }</span>
-
-        <span class="cov0" title="0">usr := user.Repository.FindByToken(token)
-        if usr == nil </span><span class="cov0" title="0">{
-                log.Println("failed attemp to connect with invalid token")
-                return
-        }</span>
-
-        <span class="cov0" title="0">usr.RevokeToken()
-
-        if !c.IsUserActivated(usr.Id) </span><span class="cov0" title="0">{
-                c.AddUser(usr)
-        }</span>
-
-        <span class="cov0" title="0">for </span><span class="cov0" title="0">{
-                mt, msg, err := conn.ReadMessage()
-                if err != nil </span><span class="cov0" title="0">{
-                        log.Println("read:", err)
-                        c.DisconnectUser(usr)
-                        break</span>
-                }
-                <span class="cov0" title="0">log.Printf("recv: %s", msg)
-                err = conn.WriteMessage(mt, msg)
-                if err != nil </span><span class="cov0" title="0">{
-                        log.Println("write:", err)
-                        c.DisconnectUser(usr)
-                        break</span>
-                }
-        }
-}
-</pre>
-		
-		<pre class="file" id="file3" style="display: none">package handler
-
-type Errors struct {
-        Errors []*Error `json:"errors"`
-}
-
-type Error struct {
-        Field   string `json:"field"`
-        Message string `json:"message"`
-        Detail  string `json:"detail"`
-}
-
-func (errors *Errors) AddError(field, message, detail string) <span class="cov8" title="1">{
-        errors.Errors = append(errors.Errors, &amp;Error{Field: field, Message: message, Detail: detail})
-}</span>
-
-func (errors *Errors) Count() int <span class="cov8" title="1">{
-        return len(errors.Errors)
-}</span>
-</pre>
-		
-		<pre class="file" id="file4" style="display: none">package handler
-
-import (
-        "github.com/gofiber/fiber/v2"
-        "github.com/iggyster/lets-go-chat/internal/user"
-)
-
-type RegisterData struct {
-        Username string `json:"userName"`
-        Password string `json:"password"`
-}
-
-type RegisterResource struct {
-        Id       string `json:"id"`
-        UserName string `json:"userName"`
-}
-
-func Register(ctx *fiber.Ctx) error <span class="cov8" title="1">{
-        data := RegisterData{}
-        if err := ctx.BodyParser(&amp;data); err != nil </span><span class="cov8" title="1">{
-                return err
-        }</span>
-
-        <span class="cov8" title="1">if errors := validate(&amp;data); errors.Count() &gt; 0 </span><span class="cov8" title="1">{
-                return ctx.Status(fiber.StatusBadRequest).JSON(errors)
-        }</span>
-
-        <span class="cov8" title="1">usr := user.New(data.Username, data.Password)
-        user.Repository.Save(usr)
-
-        return ctx.Status(fiber.StatusOK).JSON(RegisterResource{usr.Id, usr.Username})</span>
-}
-
-func validate(data *RegisterData) Errors <span class="cov8" title="1">{
-        errors := Errors{}
-        if user.Repository.IsExists(data.Username) </span><span class="cov8" title="1">{
-                errors.AddError("userName", "User already exists", "Change the username")
-        }</span>
-        <span class="cov8" title="1">if data.Username == "" </span><span class="cov8" title="1">{
-                errors.AddError("userName", "User is empty", "Change the username")
-        }</span>
-        <span class="cov8" title="1">if len(data.Username) &lt; 3 </span><span class="cov8" title="1">{
-                errors.AddError(
-                        "userName",
-                        "User is too short",
-                        "Username must be greater or equal to 3 characters",
-                )
-        }</span>
-        <span class="cov8" title="1">if data.Password == "" </span><span class="cov8" title="1">{
-                errors.AddError("password", "Password is empty", "Change the username")
-        }</span>
-        <span class="cov8" title="1">if len(data.Password) &lt;= 8 || len(data.Password) &gt; 32 </span><span class="cov8" title="1">{
-                errors.AddError(
-                        "password",
-                        "Password is invalid",
-                        "Password must be more then 8 and less then 32 characters long",
-                )
-        }</span>
-        <span class="cov8" title="1">return errors</span>
-}
-</pre>
-		
-		<pre class="file" id="file5" style="display: none">package handler
-
-import (
-        "github.com/gofiber/fiber/v2"
-        "github.com/iggyster/lets-go-chat/internal/chat"
-)
-
-func GetUsers(ctx *fiber.Ctx) error <span class="cov0" title="0">{
-        c := chat.New()
-
-        users := c.GetUsers()
-
-        ctx.Status(fiber.StatusOK).JSON(users)
-
-        return nil
-}</span>
-</pre>
-		
-		<pre class="file" id="file6" style="display: none">package middleware
+		<pre class="file" id="file1" style="display: none">package middleware
 
 import (
         "github.com/gofiber/fiber/v2"
@@ -367,7 +157,7 @@ func Accept(ctx *fiber.Ctx) error <span class="cov8" title="1">{
 }
 </pre>
 		
-		<pre class="file" id="file7" style="display: none">package middleware
+		<pre class="file" id="file2" style="display: none">package middleware
 
 import (
         "github.com/gofiber/fiber/v2"
@@ -383,7 +173,7 @@ func Boot(app *fiber.App) <span class="cov8" title="1">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file8" style="display: none">package user
+		<pre class="file" id="file3" style="display: none">package user
 
 import (
         "github.com/google/uuid"
@@ -416,7 +206,7 @@ func New(username, password string) *User <span class="cov8" title="1">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file9" style="display: none">package user
+		<pre class="file" id="file4" style="display: none">package user
 
 import (
         "fmt"
@@ -477,7 +267,7 @@ func (repo *InMemoryRepo) Save(usr *User) <span class="cov8" title="1">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file10" style="display: none">package hasher
+		<pre class="file" id="file5" style="display: none">package hasher
 
 import "golang.org/x/crypto/bcrypt"
 
@@ -498,7 +288,7 @@ func CheckPasswordHash(password, hash string) bool <span class="cov8" title="1">
 }</span>
 </pre>
 		
-		<pre class="file" id="file11" style="display: none">package tokengenerator
+		<pre class="file" id="file6" style="display: none">package tokengenerator
 
 import (
         "crypto/rand"

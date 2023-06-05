@@ -8,6 +8,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/sethvargo/go-password v0.2.0
 	github.com/stretchr/testify v1.8.2
+	github.com/valyala/fasthttp v1.47.0
 	golang.org/x/crypto v0.8.0
 )
 
@@ -26,7 +27,6 @@ require (
 	github.com/savsgio/gotils v0.0.0-20230208104028-c358bd845dee // indirect
 	github.com/tinylib/msgp v1.1.8 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.47.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	golang.org/x/sys v0.8.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
