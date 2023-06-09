@@ -8,3 +8,9 @@ This a placeholder for the future Golang project. The project is under the devel
 
 To import Hasher package: `go get github.com/iggyster/lets-go-chat/pkg/hasher`
 To import Tokengen package: `go get github.com/iggyster/lets-go-chat/pkg/tokengen`
+
+## Testing
+
+Run all tests: `go test ./... -coverprofile c.out`
+Output coverage in HTML: `go tool cover -html=c.out -o ./web/c.html`
+Check overall coverage percentage: `go tool cover -func=c.out`
