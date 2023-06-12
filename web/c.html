@@ -59,7 +59,7 @@
 				
 				<option value="file1">github.com/iggyster/lets-go-chat/internal/handler/auth.go (88.2%)</option>
 				
-				<option value="file2">github.com/iggyster/lets-go-chat/internal/handler/chat.go (0.0%)</option>
+				<option value="file2">github.com/iggyster/lets-go-chat/internal/handler/chat.go (71.4%)</option>
 				
 				<option value="file3">github.com/iggyster/lets-go-chat/internal/handler/error.go (100.0%)</option>
 				
@@ -196,11 +196,11 @@ type Chat struct {
         Repo user.UserRepo
 }
 
-func NewChat(repo user.UserRepo) *Chat <span class="cov0" title="0">{
+func NewChat(repo user.UserRepo) *Chat <span class="cov8" title="1">{
         return &amp;Chat{Repo: repo}
 }</span>
 
-func (c *Chat) ServeHTTP(w http.ResponseWriter, req *http.Request) <span class="cov0" title="0">{
+func (c *Chat) ServeHTTP(w http.ResponseWriter, req *http.Request) <span class="cov8" title="1">{
         conn, err := ws.Upgrade(w, req, nil)
         defer conn.Close()
 
@@ -208,36 +208,36 @@ func (c *Chat) ServeHTTP(w http.ResponseWriter, req *http.Request) <span class="
                 log.Fatal(err)
         }</span>
 
-        <span class="cov0" title="0">token := req.URL.Query().Get("token")
+        <span class="cov8" title="1">token := req.URL.Query().Get("token")
         if token == "" </span><span class="cov0" title="0">{
                 log.Println("invalid token accepted")
 
                 return
         }</span>
 
-        <span class="cov0" title="0">usr := c.Repo.FindByToken(token)
+        <span class="cov8" title="1">usr := c.Repo.FindByToken(token)
         if usr == nil </span><span class="cov0" title="0">{
                 log.Println("access denied")
 
                 return
         }</span>
 
-        <span class="cov0" title="0">usr.RevokeToken()
+        <span class="cov8" title="1">usr.RevokeToken()
 
-        if !usr.IsActivated() </span><span class="cov0" title="0">{
+        if !usr.IsActivated() </span><span class="cov8" title="1">{
                 usr.Activate()
         }</span>
 
-        <span class="cov0" title="0">for </span><span class="cov0" title="0">{
+        <span class="cov8" title="1">for </span><span class="cov8" title="1">{
                 mt, msg, err := conn.ReadMessage()
-                if err != nil </span><span class="cov0" title="0">{
+                if err != nil </span><span class="cov8" title="1">{
                         log.Println("read:", err)
                         usr.Deactivate()
 
                         return
                 }</span>
 
-                <span class="cov0" title="0">log.Printf("recv: %s", msg)
+                <span class="cov8" title="1">log.Printf("recv: %s", msg)
                 err = conn.WriteMessage(mt, msg)
                 if err != nil </span><span class="cov0" title="0">{
                         log.Println("write:", err)

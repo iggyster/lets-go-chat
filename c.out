@@ -1,5 +1,6 @@
 mode: set
-github.com/iggyster/lets-go-chat/pkg/tokengen/tokengen.go:9.26,14.2 3 1
+github.com/iggyster/lets-go-chat/pkg/hasher/hasher.go:7.52,11.2 2 1
+github.com/iggyster/lets-go-chat/pkg/hasher/hasher.go:15.52,19.2 2 1
 github.com/iggyster/lets-go-chat/internal/handler/active.go:14.70,20.2 3 1
 github.com/iggyster/lets-go-chat/internal/handler/active.go:22.44,24.2 1 1
 github.com/iggyster/lets-go-chat/internal/handler/auth.go:29.40,31.2 1 1
@@ -9,19 +10,19 @@ github.com/iggyster/lets-go-chat/internal/handler/auth.go:43.2,50.101 6 1
 github.com/iggyster/lets-go-chat/internal/handler/auth.go:53.78,57.16 3 1
 github.com/iggyster/lets-go-chat/internal/handler/auth.go:57.16,59.3 1 0
 github.com/iggyster/lets-go-chat/internal/handler/auth.go:61.2,61.13 1 1
-github.com/iggyster/lets-go-chat/internal/handler/chat.go:20.40,22.2 1 0
-github.com/iggyster/lets-go-chat/internal/handler/chat.go:24.68,28.16 3 0
+github.com/iggyster/lets-go-chat/internal/handler/chat.go:20.40,22.2 1 1
+github.com/iggyster/lets-go-chat/internal/handler/chat.go:24.68,28.16 3 1
 github.com/iggyster/lets-go-chat/internal/handler/chat.go:28.16,30.3 1 0
-github.com/iggyster/lets-go-chat/internal/handler/chat.go:32.2,33.17 2 0
+github.com/iggyster/lets-go-chat/internal/handler/chat.go:32.2,33.17 2 1
 github.com/iggyster/lets-go-chat/internal/handler/chat.go:33.17,37.3 2 0
-github.com/iggyster/lets-go-chat/internal/handler/chat.go:39.2,40.16 2 0
+github.com/iggyster/lets-go-chat/internal/handler/chat.go:39.2,40.16 2 1
 github.com/iggyster/lets-go-chat/internal/handler/chat.go:40.16,44.3 2 0
-github.com/iggyster/lets-go-chat/internal/handler/chat.go:46.2,48.24 2 0
-github.com/iggyster/lets-go-chat/internal/handler/chat.go:48.24,50.3 1 0
-github.com/iggyster/lets-go-chat/internal/handler/chat.go:52.2,52.6 1 0
-github.com/iggyster/lets-go-chat/internal/handler/chat.go:52.6,54.17 2 0
-github.com/iggyster/lets-go-chat/internal/handler/chat.go:54.17,59.4 3 0
-github.com/iggyster/lets-go-chat/internal/handler/chat.go:61.3,63.17 3 0
+github.com/iggyster/lets-go-chat/internal/handler/chat.go:46.2,48.24 2 1
+github.com/iggyster/lets-go-chat/internal/handler/chat.go:48.24,50.3 1 1
+github.com/iggyster/lets-go-chat/internal/handler/chat.go:52.2,52.6 1 1
+github.com/iggyster/lets-go-chat/internal/handler/chat.go:52.6,54.17 2 1
+github.com/iggyster/lets-go-chat/internal/handler/chat.go:54.17,59.4 3 1
+github.com/iggyster/lets-go-chat/internal/handler/chat.go:61.3,63.17 3 1
 github.com/iggyster/lets-go-chat/internal/handler/chat.go:63.17,68.4 3 0
 github.com/iggyster/lets-go-chat/internal/handler/error.go:15.63,17.2 1 1
 github.com/iggyster/lets-go-chat/internal/handler/error.go:19.35,21.2 1 1
@@ -41,8 +42,7 @@ github.com/iggyster/lets-go-chat/internal/handler/register.go:53.25,55.3 1 1
 github.com/iggyster/lets-go-chat/internal/handler/register.go:56.2,56.56 1 1
 github.com/iggyster/lets-go-chat/internal/handler/register.go:56.56,62.3 1 1
 github.com/iggyster/lets-go-chat/internal/handler/register.go:63.2,63.15 1 1
-github.com/iggyster/lets-go-chat/pkg/hasher/hasher.go:7.52,11.2 2 1
-github.com/iggyster/lets-go-chat/pkg/hasher/hasher.go:15.52,19.2 2 1
+github.com/iggyster/lets-go-chat/pkg/tokengen/tokengen.go:9.26,14.2 3 1
 github.com/iggyster/lets-go-chat/internal/user/model.go:16.41,18.2 1 1
 github.com/iggyster/lets-go-chat/internal/user/model.go:20.32,22.2 1 1
 github.com/iggyster/lets-go-chat/internal/user/model.go:24.37,26.2 1 1
