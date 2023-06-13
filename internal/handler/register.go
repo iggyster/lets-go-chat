@@ -1,39 +1,43 @@
 package handler
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"encoding/json"
+	"net/http"
+
 	"github.com/iggyster/lets-go-chat/internal/user"
 )
 
-type RegisterData struct {
-	Username string `json:"userName"`
-	Password string `json:"password"`
-}
-
-type RegisterResource struct {
-	Id       string `json:"id"`
-	UserName string `json:"userName"`
-}
-
-func Register(ctx *fiber.Ctx) error {
-	data := RegisterData{}
-	if err := ctx.BodyParser(&data); err != nil {
-		return err
+type (
+	Register struct {
+		Repo user.UserRepo
 	}
+)
 
-	if errors := validate(&data); errors.Count() > 0 {
-		return ctx.Status(fiber.StatusBadRequest).JSON(errors)
+func NewRegister(repo user.UserRepo) *Register {
+	return &Register{Repo: repo}
+}
+
+func (handler *Register) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	data := decodeAuthRequest(w, req)
+	if err := handler.validate(&data); err.Count() != 0 {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(err.Errors)
+
+		return
 	}
 
 	usr := user.New(data.Username, data.Password)
-	user.Repository.Save(usr)
+	handler.Repo.Save(usr)
 
-	return ctx.Status(fiber.StatusOK).JSON(RegisterResource{usr.Id, usr.Username})
+	json.NewEncoder(w).Encode(usr)
 }
 
-func validate(data *RegisterData) Errors {
+func (handler *Register) validate(data *AuthRequest) Errors {
+	//TODO handler.Validator.validate(data, handler.getConstraints())
 	errors := Errors{}
-	if user.Repository.IsExists(data.Username) {
+	if handler.Repo.IsExists(data.Username) {
 		errors.AddError("userName", "User already exists", "Change the username")
 	}
 	if data.Username == "" {

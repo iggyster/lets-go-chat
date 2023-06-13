@@ -2,53 +2,69 @@ package handler
 
 import (
 	"log"
+	"net/http"
 
-	"github.com/gofiber/websocket/v2"
-	"github.com/iggyster/lets-go-chat/internal/chat"
+	"github.com/gorilla/websocket"
 	"github.com/iggyster/lets-go-chat/internal/user"
 )
 
-func StartChat(conn *websocket.Conn) {
-	defer func() {
-		err := conn.Close()
-		if err != nil {
-			log.Fatalf("failed to close ws connection")
-		}
-	}()
+var ws websocket.Upgrader = websocket.Upgrader{
+	ReadBufferSize:  1024,
+	WriteBufferSize: 1024,
+}
 
-	c := chat.New()
+type Chat struct {
+	Repo user.UserRepo
+}
 
-	token := conn.Query("token")
+func NewChat(repo user.UserRepo) *Chat {
+	return &Chat{Repo: repo}
+}
+
+func (c *Chat) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	conn, err := ws.Upgrade(w, req, nil)
+	defer conn.Close()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	token := req.URL.Query().Get("token")
 	if token == "" {
-		log.Println("failed attemp to connect without token")
+		log.Println("invalid token accepted")
+
 		return
 	}
 
-	usr := user.Repository.FindByToken(token)
+	usr := c.Repo.FindByToken(token)
 	if usr == nil {
-		log.Println("failed attemp to connect with invalid token")
+		log.Println("access denied")
+
 		return
 	}
 
 	usr.RevokeToken()
 
-	if !c.IsUserActivated(usr.Id) {
-		c.AddUser(usr)
+	if !usr.IsActivated() {
+		usr.Activate()
 	}
 
 	for {
 		mt, msg, err := conn.ReadMessage()
 		if err != nil {
 			log.Println("read:", err)
-			c.DisconnectUser(usr)
-			break
+			usr.Deactivate()
+
+			return
 		}
+
 		log.Printf("recv: %s", msg)
 		err = conn.WriteMessage(mt, msg)
 		if err != nil {
 			log.Println("write:", err)
-			c.DisconnectUser(usr)
-			break
+			usr.Deactivate()
+
+			return
 		}
 	}
 }

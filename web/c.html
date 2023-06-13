@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>handler: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">github.com/iggyster/lets-go-chat/internal/handler/active.go (100.0%)</option>
+				
+				<option value="file1">github.com/iggyster/lets-go-chat/internal/handler/auth.go (88.2%)</option>
+				
+				<option value="file2">github.com/iggyster/lets-go-chat/internal/handler/chat.go (71.4%)</option>
+				
+				<option value="file3">github.com/iggyster/lets-go-chat/internal/handler/error.go (100.0%)</option>
+				
+				<option value="file4">github.com/iggyster/lets-go-chat/internal/handler/notfound.go (100.0%)</option>
+				
+				<option value="file5">github.com/iggyster/lets-go-chat/internal/handler/register.go (100.0%)</option>
+				
+				<option value="file6">github.com/iggyster/lets-go-chat/internal/user/model.go (100.0%)</option>
+				
+				<option value="file7">github.com/iggyster/lets-go-chat/internal/user/repo.go (100.0%)</option>
+				
+				<option value="file8">github.com/iggyster/lets-go-chat/pkg/hasher/hasher.go (100.0%)</option>
+				
+				<option value="file9">github.com/iggyster/lets-go-chat/pkg/tokengen/tokengen.go (100.0%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package handler
+
+import (
+        "encoding/json"
+        "net/http"
+
+        "github.com/iggyster/lets-go-chat/internal/user"
+)
+
+type Active struct {
+        Repo user.UserRepo
+}
+
+func (a *Active) ServeHTTP(w http.ResponseWriter, req *http.Request) <span class="cov8" title="1">{
+        w.Header().Set("Content-Type", "application/json")
+
+        users := a.Repo.FindActivated()
+
+        json.NewEncoder(w).Encode(users)
+}</span>
+
+func NewActive(repo user.UserRepo) *Active <span class="cov8" title="1">{
+        return &amp;Active{Repo: repo}
+}</span>
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package handler
+
+import (
+        "encoding/json"
+        "fmt"
+        "net/http"
+        "time"
+
+        "github.com/iggyster/lets-go-chat/internal/user"
+        "github.com/iggyster/lets-go-chat/pkg/hasher"
+        "github.com/iggyster/lets-go-chat/pkg/tokengen"
+)
+
+type (
+        Auth struct {
+                Repo user.UserRepo
+        }
+
+        AuthRequest struct {
+                Username string `json:"userName"`
+                Password string `json:"password"`
+        }
+
+        AuthResponse struct {
+                Url string `json:"url"`
+        }
+)
+
+func NewAuth(repo user.UserRepo) *Auth <span class="cov8" title="1">{
+        return &amp;Auth{Repo: repo}
+}</span>
+
+func (handler *Auth) ServeHTTP(w http.ResponseWriter, req *http.Request) <span class="cov8" title="1">{
+        w.Header().Set("Content-Type", "application/json")
+
+        data := decodeAuthRequest(w, req)
+
+        usr, err := handler.Repo.FindByUsername(data.Username)
+        if err != nil || !hasher.CheckPasswordHash(data.Password, usr.Password) </span><span class="cov0" title="0">{
+                http.Error(w, "Invalid credentials", http.StatusBadRequest)
+        }</span>
+
+        <span class="cov8" title="1">token := tokengen.New(16)
+        usr.SetToken(token)
+        handler.Repo.Save(usr)
+
+        w.Header().Set("X-Rate-Limit", "5000")
+        w.Header().Set("X-Expires-After", time.Now().Add(time.Hour*1).UTC().String())
+
+        json.NewEncoder(w).Encode(AuthResponse{Url: fmt.Sprintf("ws://localhost:8080/ws?token=%v", token)})</span>
+}
+
+func decodeAuthRequest(w http.ResponseWriter, req *http.Request) AuthRequest <span class="cov8" title="1">{
+        var data AuthRequest
+
+        err := json.NewDecoder(req.Body).Decode(&amp;data)
+        if err != nil </span><span class="cov0" title="0">{
+                http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+        }</span>
+
+        <span class="cov8" title="1">return data</span>
+}
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package handler
+
+import (
+        "log"
+        "net/http"
+
+        "github.com/gorilla/websocket"
+        "github.com/iggyster/lets-go-chat/internal/user"
+)
+
+var ws websocket.Upgrader = websocket.Upgrader{
+        ReadBufferSize:  1024,
+        WriteBufferSize: 1024,
+}
+
+type Chat struct {
+        Repo user.UserRepo
+}
+
+func NewChat(repo user.UserRepo) *Chat <span class="cov8" title="1">{
+        return &amp;Chat{Repo: repo}
+}</span>
+
+func (c *Chat) ServeHTTP(w http.ResponseWriter, req *http.Request) <span class="cov8" title="1">{
+        conn, err := ws.Upgrade(w, req, nil)
+        defer conn.Close()
+
+        if err != nil </span><span class="cov0" title="0">{
+                log.Fatal(err)
+        }</span>
+
+        <span class="cov8" title="1">token := req.URL.Query().Get("token")
+        if token == "" </span><span class="cov0" title="0">{
+                log.Println("invalid token accepted")
+
+                return
+        }</span>
+
+        <span class="cov8" title="1">usr := c.Repo.FindByToken(token)
+        if usr == nil </span><span class="cov0" title="0">{
+                log.Println("access denied")
+
+                return
+        }</span>
+
+        <span class="cov8" title="1">usr.RevokeToken()
+
+        if !usr.IsActivated() </span><span class="cov8" title="1">{
+                usr.Activate()
+        }</span>
+
+        <span class="cov8" title="1">for </span><span class="cov8" title="1">{
+                mt, msg, err := conn.ReadMessage()
+                if err != nil </span><span class="cov8" title="1">{
+                        log.Println("read:", err)
+                        usr.Deactivate()
+
+                        return
+                }</span>
+
+                <span class="cov8" title="1">log.Printf("recv: %s", msg)
+                err = conn.WriteMessage(mt, msg)
+                if err != nil </span><span class="cov0" title="0">{
+                        log.Println("write:", err)
+                        usr.Deactivate()
+
+                        return
+                }</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package handler
+
+type (
+        Errors struct {
+                Errors []*Error `json:"errors"`
+        }
+
+        Error struct {
+                Field   string `json:"field"`
+                Message string `json:"message"`
+                Detail  string `json:"detail"`
+        }
+)
+
+func (errors *Errors) AddError(field, message, detail string) <span class="cov8" title="1">{
+        errors.Errors = append(errors.Errors, &amp;Error{Field: field, Message: message, Detail: detail})
+}</span>
+
+func (errors *Errors) Count() int <span class="cov8" title="1">{
+        return len(errors.Errors)
+}</span>
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package handler
+
+import (
+        "net/http"
+)
+
+type NotFound struct{}
+
+func (handler *NotFound) ServeHTTP(w http.ResponseWriter, r *http.Request) <span class="cov8" title="1">{
+        http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+}</span>
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package handler
+
+import (
+        "encoding/json"
+        "net/http"
+
+        "github.com/iggyster/lets-go-chat/internal/user"
+)
+
+type (
+        Register struct {
+                Repo user.UserRepo
+        }
+)
+
+func NewRegister(repo user.UserRepo) *Register <span class="cov8" title="1">{
+        return &amp;Register{Repo: repo}
+}</span>
+
+func (handler *Register) ServeHTTP(w http.ResponseWriter, req *http.Request) <span class="cov8" title="1">{
+        w.Header().Set("Content-Type", "application/json")
+
+        data := decodeAuthRequest(w, req)
+        if err := handler.validate(&amp;data); err.Count() != 0 </span><span class="cov8" title="1">{
+                w.WriteHeader(http.StatusBadRequest)
+                json.NewEncoder(w).Encode(err.Errors)
+
+                return
+        }</span>
+
+        <span class="cov8" title="1">usr := user.New(data.Username, data.Password)
+        handler.Repo.Save(usr)
+
+        json.NewEncoder(w).Encode(usr)</span>
+}
+
+func (handler *Register) validate(data *AuthRequest) Errors <span class="cov8" title="1">{
+        //TODO handler.Validator.validate(data, handler.getConstraints())
+        errors := Errors{}
+        if handler.Repo.IsExists(data.Username) </span><span class="cov8" title="1">{
+                errors.AddError("userName", "User already exists", "Change the username")
+        }</span>
+        <span class="cov8" title="1">if data.Username == "" </span><span class="cov8" title="1">{
+                errors.AddError("userName", "User is empty", "Change the username")
+        }</span>
+        <span class="cov8" title="1">if len(data.Username) &lt; 3 </span><span class="cov8" title="1">{
+                errors.AddError(
+                        "userName",
+                        "User is too short",
+                        "Username must be greater or equal to 3 characters",
+                )
+        }</span>
+        <span class="cov8" title="1">if data.Password == "" </span><span class="cov8" title="1">{
+                errors.AddError("password", "Password is empty", "Change the username")
+        }</span>
+        <span class="cov8" title="1">if len(data.Password) &lt;= 8 || len(data.Password) &gt; 32 </span><span class="cov8" title="1">{
+                errors.AddError(
+                        "password",
+                        "Password is invalid",
+                        "Password must be more then 8 and less then 32 characters long",
+                )
+        }</span>
+        <span class="cov8" title="1">return errors</span>
+}
+</pre>
+		
+		<pre class="file" id="file6" style="display: none">package user
+
+import (
+        "github.com/google/uuid"
+        "github.com/iggyster/lets-go-chat/pkg/hasher"
+)
+
+type User struct {
+        Id        string `json:"id"`
+        Username  string `json:"username"`
+        Password  string `json:"-"`
+        Token     string `json:"-"`
+        activated bool   `json:"-"`
+}
+
+func (usr *User) SetToken(token string) <span class="cov8" title="1">{
+        usr.Token = token
+}</span>
+
+func (usr *User) RevokeToken() <span class="cov8" title="1">{
+        usr.Token = ""
+}</span>
+
+func (usr *User) IsActivated() bool <span class="cov8" title="1">{
+        return usr.activated
+}</span>
+
+func (usr *User) Activate() <span class="cov8" title="1">{
+        usr.activated = true
+}</span>
+
+func (usr *User) Deactivate() <span class="cov8" title="1">{
+        usr.activated = false
+}</span>
+
+func New(username, password string) *User <span class="cov8" title="1">{
+        hashed, _ := hasher.HashPassword(password)
+
+        return &amp;User{
+                Id:       uuid.New().String(),
+                Username: username,
+                Password: hashed,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file7" style="display: none">package user
+
+import (
+        "fmt"
+        "sync"
+)
+
+type UserRepo interface {
+        FindByUsername(username string) (*User, error)
+        FindByToken(toekn string) *User
+        FindActivated() []*User
+        IsExists(username string) bool
+        Save(user *User)
+}
+
+type InMemoryUserRepo struct {
+        sync.Map
+}
+
+func NewRepo() *InMemoryUserRepo <span class="cov8" title="1">{
+        return &amp;InMemoryUserRepo{}
+}</span>
+
+func (repo *InMemoryUserRepo) FindByUsername(username string) (*User, error) <span class="cov8" title="1">{
+        val, ok := repo.Load(username)
+        if !ok </span><span class="cov8" title="1">{
+                return nil, fmt.Errorf("no user found")
+        }</span>
+
+        <span class="cov8" title="1">usr, ok := val.(*User)
+        if !ok </span><span class="cov8" title="1">{
+                return nil, fmt.Errorf("invalid user type %T", usr)
+        }</span>
+
+        <span class="cov8" title="1">return usr, nil</span>
+}
+
+func (repo *InMemoryUserRepo) FindByToken(token string) *User <span class="cov8" title="1">{
+        var usr *User
+
+        repo.Range(func(key, value any) bool </span><span class="cov8" title="1">{
+                temp, ok := value.(*User)
+                if ok &amp;&amp; temp.Token == token </span><span class="cov8" title="1">{
+                        usr = temp
+                        return false
+                }</span>
+
+                <span class="cov8" title="1">return true</span>
+        })
+
+        <span class="cov8" title="1">return usr</span>
+}
+
+func (repo *InMemoryUserRepo) FindActivated() []*User <span class="cov8" title="1">{
+        var activated []*User
+
+        repo.Range(func(key, value any) bool </span><span class="cov8" title="1">{
+                if usr, ok := value.(*User); ok &amp;&amp; usr.IsActivated() </span><span class="cov8" title="1">{
+                        activated = append(activated, usr)
+                }</span>
+
+                <span class="cov8" title="1">return true</span>
+        })
+
+        <span class="cov8" title="1">return activated</span>
+}
+
+func (repo *InMemoryUserRepo) IsExists(username string) bool <span class="cov8" title="1">{
+        _, ok := repo.Load(username)
+
+        return ok
+}</span>
+
+func (repo *InMemoryUserRepo) Save(usr *User) <span class="cov8" title="1">{
+        repo.Store(usr.Username, usr)
+}</span>
+</pre>
+		
+		<pre class="file" id="file8" style="display: none">package hasher
+
+import "golang.org/x/crypto/bcrypt"
+
+// HashPassword is a decorator for bcrypt.GenerateFromPassword.
+// It returns a hashed string encrypted with the bcrypt algorithm.
+func HashPassword(password string) (string, error) <span class="cov8" title="1">{
+        bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+
+        return string(bytes), err
+}</span>
+
+// CheckPasswordHash is a decorator for bcrypt.CompareHashAndPassword.
+// It returns true if the password match the hash or false if it's not.
+func CheckPasswordHash(password, hash string) bool <span class="cov8" title="1">{
+        err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+
+        return err == nil
+}</span>
+</pre>
+		
+		<pre class="file" id="file9" style="display: none">package tokengen
+
+import (
+        "crypto/rand"
+        "fmt"
+)
+
+// New generates a new string token according to the length.
+func New(len int) string <span class="cov8" title="1">{
+        t := make([]byte, len/2)
+        rand.Read(t)
+
+        return fmt.Sprintf("%x", t)
+}</span>
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>

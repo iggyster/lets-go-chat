@@ -6,10 +6,11 @@ import (
 )
 
 type User struct {
-	Id       string `json:"id"`
-	Username string `json:"username"`
-	Password string `json:"-"`
-	Token    string `json:"-"`
+	Id        string `json:"id"`
+	Username  string `json:"username"`
+	Password  string `json:"-"`
+	Token     string `json:"-"`
+	activated bool   `json:"-"`
 }
 
 func (usr *User) SetToken(token string) {
@@ -18,6 +19,18 @@ func (usr *User) SetToken(token string) {
 
 func (usr *User) RevokeToken() {
 	usr.Token = ""
+}
+
+func (usr *User) IsActivated() bool {
+	return usr.activated
+}
+
+func (usr *User) Activate() {
+	usr.activated = true
+}
+
+func (usr *User) Deactivate() {
+	usr.activated = false
 }
 
 func New(username, password string) *User {

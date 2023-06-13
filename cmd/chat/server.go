@@ -1,17 +1,24 @@
 package main
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"github.com/iggyster/lets-go-chat/internal/app"
+	"github.com/iggyster/lets-go-chat/internal/handler"
 	"github.com/iggyster/lets-go-chat/internal/middleware"
-	"github.com/iggyster/lets-go-chat/internal/router"
-	"log"
+	"github.com/iggyster/lets-go-chat/internal/user"
 )
 
+var repo user.UserRepo = user.NewRepo()
+
 func main() {
-	app := fiber.New()
+	app := app.New(":8080")
 
-	middleware.Boot(app)
-	router.Init(app)
+	app.Use(middleware.Recover)
+	app.Use(middleware.Logger)
 
-	log.Fatal(app.Listen(":8080"))
+	app.Post("/user", handler.NewRegister(repo))
+	app.Post("/user/login", handler.NewAuth(repo))
+	app.Get("/ws", handler.NewChat(repo))
+	app.Get("/users/active", handler.NewActive(repo))
+
+	app.Start()
 }

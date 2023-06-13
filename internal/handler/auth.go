@@ -1,45 +1,62 @@
 package handler
 
 import (
+	"encoding/json"
 	"fmt"
+	"net/http"
 	"time"
-	"github.com/gofiber/fiber/v2"
+
 	"github.com/iggyster/lets-go-chat/internal/user"
 	"github.com/iggyster/lets-go-chat/pkg/hasher"
-	"github.com/iggyster/lets-go-chat/pkg/tokengenerator"
-
+	"github.com/iggyster/lets-go-chat/pkg/tokengen"
 )
 
-type LoginData struct {
-	Username string `json:"userName"`
-	Password string `json:"password"`
-}
-
-type LoginResource struct {
-	Url string `json:"url"`
-}
-
-func Auth(ctx *fiber.Ctx) error {
-	data := LoginData{}
-	if err := ctx.BodyParser(&data); err != nil {
-		return err
+type (
+	Auth struct {
+		Repo user.UserRepo
 	}
 
-	usr, err := user.Repository.FindByUsername(data.Username)
+	AuthRequest struct {
+		Username string `json:"userName"`
+		Password string `json:"password"`
+	}
+
+	AuthResponse struct {
+		Url string `json:"url"`
+	}
+)
+
+func NewAuth(repo user.UserRepo) *Auth {
+	return &Auth{Repo: repo}
+}
+
+func (handler *Auth) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	data := decodeAuthRequest(w, req)
+
+	usr, err := handler.Repo.FindByUsername(data.Username)
 	if err != nil || !hasher.CheckPasswordHash(data.Password, usr.Password) {
-		return fiber.NewError(fiber.StatusBadRequest, "Invalid credentials")
+		http.Error(w, "Invalid credentials", http.StatusBadRequest)
 	}
 
-	token, err := tokengenerator.Generate(16)
-	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Token generation failed")
-	}
-
+	token := tokengen.New(16)
 	usr.SetToken(token)
-	user.Repository.Save(usr)
+	handler.Repo.Save(usr)
 
-	ctx.Append("X-Rate-Limit", "5000")
-	ctx.Append("X-Expires-After", time.Now().Add(time.Hour*1).UTC().String())
+	w.Header().Set("X-Rate-Limit", "5000")
+	w.Header().Set("X-Expires-After", time.Now().Add(time.Hour*1).UTC().String())
 
-	return ctx.Status(fiber.StatusOK).JSON(LoginResource{Url: fmt.Sprintf("ws://localhost:8080/ws?token=%v", token)})
+	json.NewEncoder(w).Encode(AuthResponse{Url: fmt.Sprintf("ws://localhost:8080/ws?token=%v", token)})
+}
+
+func decodeAuthRequest(w http.ResponseWriter, req *http.Request) AuthRequest {
+	var data AuthRequest
+
+	err := json.NewDecoder(req.Body).Decode(&data)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+	}
+
+	return data
 }
