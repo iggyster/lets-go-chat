@@ -6,26 +6,27 @@ import (
 	"testing"
 
 	"github.com/gorilla/websocket"
+	"github.com/iggyster/lets-go-chat/internal/chat"
 	"github.com/iggyster/lets-go-chat/internal/user"
 )
 
 func TestNewChat(t *testing.T) {
-	var h Any = NewChat(user.NewRepo())
+	var h Any = NewChatHandler(user.NewRepo(), chat.NewHub())
 
-	_, ok := h.(*Chat)
+	_, ok := h.(*ChatHandler)
 	if !ok {
 		t.Errorf("faile to create new chat handler")
 	}
 }
 
 func TestChat_ServeHTTP(t *testing.T) {
-	usr := user.New("test", "pass")
 	repo := user.NewRepo()
-	handler := NewChat(repo)
+	handler := NewChatHandler(repo, chat.NewHub())
 
 	server := httptest.NewServer(handler)
 	defer server.Close()
 
+	usr := user.New("test", "pass")
 	usr.SetToken("token")
 	repo.Save(usr)
 
