@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"os"
 
 	"github.com/iggyster/lets-go-chat/internal/app"
 	"github.com/iggyster/lets-go-chat/internal/chat"
@@ -17,6 +18,8 @@ var (
 )
 
 func main() {
+	app.InitEnv()
+
 	db := db.NewMongoClient()
 	defer func() {
 		if err := db.Disconnect(context.TODO()); err != nil {
@@ -28,7 +31,7 @@ func main() {
 	messageRepo = chat.NewRepo(db)
 
 	hub := chat.NewHub(messageRepo)
-	app := app.New(":8080")
+	app := app.New(":" + os.Getenv("APP_PORT"))
 
 	go hub.Run()
 
