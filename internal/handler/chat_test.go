@@ -7,11 +7,15 @@ import (
 
 	"github.com/gorilla/websocket"
 	"github.com/iggyster/lets-go-chat/internal/chat"
+	"github.com/iggyster/lets-go-chat/internal/db"
 	"github.com/iggyster/lets-go-chat/internal/user"
 )
 
 func TestNewChat(t *testing.T) {
-	var h Any = NewChatHandler(user.NewRepo(), chat.NewHub())
+	db := db.NewMongoClient()
+	messageRepo := chat.NewRepo(db)
+
+	var h Any = NewChatHandler(user.NewRepo(), messageRepo, chat.NewHub(messageRepo))
 
 	_, ok := h.(*ChatHandler)
 	if !ok {
@@ -20,8 +24,11 @@ func TestNewChat(t *testing.T) {
 }
 
 func TestChat_ServeHTTP(t *testing.T) {
+	db := db.NewMongoClient()
 	repo := user.NewRepo()
-	handler := NewChatHandler(repo, chat.NewHub())
+	messageRepo := chat.NewRepo(db)
+
+	handler := NewChatHandler(repo, messageRepo, chat.NewHub(messageRepo))
 
 	server := httptest.NewServer(handler)
 	defer server.Close()
