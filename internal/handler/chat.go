@@ -4,31 +4,25 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gorilla/websocket"
+	"github.com/iggyster/lets-go-chat/internal/chat"
 	"github.com/iggyster/lets-go-chat/internal/user"
 )
 
-var ws websocket.Upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
+type ChatHandler struct {
+	userRepo    user.UserRepo
+	messageRepo chat.MessageRepo
+	hub         *chat.Hub
 }
 
-type Chat struct {
-	Repo user.UserRepo
-}
-
-func NewChat(repo user.UserRepo) *Chat {
-	return &Chat{Repo: repo}
-}
-
-func (c *Chat) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	conn, err := ws.Upgrade(w, req, nil)
-	defer conn.Close()
-
-	if err != nil {
-		log.Fatal(err)
+func NewChatHandler(userRepo user.UserRepo, messageRepo chat.MessageRepo, hub *chat.Hub) *ChatHandler {
+	return &ChatHandler{
+		userRepo:    userRepo,
+		messageRepo: messageRepo,
+		hub:         hub,
 	}
+}
 
+func (chatHandler *ChatHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	token := req.URL.Query().Get("token")
 	if token == "" {
 		log.Println("invalid token accepted")
@@ -36,35 +30,21 @@ func (c *Chat) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	usr := c.Repo.FindByToken(token)
+	usr := chatHandler.userRepo.FindByToken(token)
 	if usr == nil {
 		log.Println("access denied")
 
 		return
 	}
 
-	usr.RevokeToken()
+	conn := chat.NewConn(w, req)
+	client := chat.NewClient(chatHandler.hub, conn, usr)
 
-	if !usr.IsActivated() {
-		usr.Activate()
+	messages := chatHandler.messageRepo.FindAll()
+	if messages != nil {
+		client.RestoreHistory(&messages)
 	}
 
-	for {
-		mt, msg, err := conn.ReadMessage()
-		if err != nil {
-			log.Println("read:", err)
-			usr.Deactivate()
-
-			return
-		}
-
-		log.Printf("recv: %s", msg)
-		err = conn.WriteMessage(mt, msg)
-		if err != nil {
-			log.Println("write:", err)
-			usr.Deactivate()
-
-			return
-		}
-	}
+	go client.Read()
+	go client.Write()
 }

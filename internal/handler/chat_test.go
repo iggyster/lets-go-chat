@@ -6,26 +6,34 @@ import (
 	"testing"
 
 	"github.com/gorilla/websocket"
+	"github.com/iggyster/lets-go-chat/internal/chat"
+	"github.com/iggyster/lets-go-chat/internal/db"
 	"github.com/iggyster/lets-go-chat/internal/user"
 )
 
 func TestNewChat(t *testing.T) {
-	var h Any = NewChat(user.NewRepo())
+	db := db.NewMongoClient()
+	messageRepo := chat.NewRepo(db)
 
-	_, ok := h.(*Chat)
+	var h Any = NewChatHandler(user.NewRepo(), messageRepo, chat.NewHub(messageRepo))
+
+	_, ok := h.(*ChatHandler)
 	if !ok {
 		t.Errorf("faile to create new chat handler")
 	}
 }
 
 func TestChat_ServeHTTP(t *testing.T) {
-	usr := user.New("test", "pass")
+	db := db.NewMongoClient()
 	repo := user.NewRepo()
-	handler := NewChat(repo)
+	messageRepo := chat.NewRepo(db)
+
+	handler := NewChatHandler(repo, messageRepo, chat.NewHub(messageRepo))
 
 	server := httptest.NewServer(handler)
 	defer server.Close()
 
+	usr := user.New("test", "pass")
 	usr.SetToken("token")
 	repo.Save(usr)
 

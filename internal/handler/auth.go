@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/iggyster/lets-go-chat/internal/user"
@@ -47,7 +48,9 @@ func (handler *Auth) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("X-Rate-Limit", "5000")
 	w.Header().Set("X-Expires-After", time.Now().Add(time.Hour*1).UTC().String())
 
-	json.NewEncoder(w).Encode(AuthResponse{Url: fmt.Sprintf("ws://localhost:8080/ws?token=%v", token)})
+	host := os.Getenv("APP_HOST")
+
+	json.NewEncoder(w).Encode(AuthResponse{Url: fmt.Sprintf("ws://%v:8080/ws?token=%v", host, token)})
 }
 
 func decodeAuthRequest(w http.ResponseWriter, req *http.Request) AuthRequest {
