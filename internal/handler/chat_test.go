@@ -12,10 +12,10 @@ import (
 )
 
 func TestNewChat(t *testing.T) {
-	db := db.NewMongoClient()
-	messageRepo := chat.NewRepo(db)
+	db, _, _ := db.ProvideClient()
+	messageRepo := chat.ProvideMessageRepo(db)
 
-	var h Any = NewChatHandler(user.NewRepo(), messageRepo, chat.NewHub(messageRepo))
+	var h Any = ProvideChat(user.ProvideInMemoryUserRepo(), messageRepo, chat.NewHub(messageRepo))
 
 	_, ok := h.(*ChatHandler)
 	if !ok {
@@ -24,11 +24,11 @@ func TestNewChat(t *testing.T) {
 }
 
 func TestChat_ServeHTTP(t *testing.T) {
-	db := db.NewMongoClient()
-	repo := user.NewRepo()
-	messageRepo := chat.NewRepo(db)
+	db, _, _ := db.ProvideClient()
+	repo := user.ProvideInMemoryUserRepo()
+	messageRepo := chat.ProvideMessageRepo(db)
 
-	handler := NewChatHandler(repo, messageRepo, chat.NewHub(messageRepo))
+	handler := ProvideChat(repo, messageRepo, chat.NewHub(messageRepo))
 
 	server := httptest.NewServer(handler)
 	defer server.Close()

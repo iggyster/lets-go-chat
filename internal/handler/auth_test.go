@@ -13,7 +13,7 @@ import (
 type Any interface{}
 
 func TestNewAuth(t *testing.T) {
-	var h Any = NewAuth(user.NewRepo())
+	var h Any = ProvideAuth(user.ProvideInMemoryUserRepo())
 
 	_, ok := h.(*Auth)
 	if !ok {
@@ -23,7 +23,7 @@ func TestNewAuth(t *testing.T) {
 
 func TestAuth_ServerHTTP(t *testing.T) {
 	var b bytes.Buffer
-	var repo user.UserRepo = user.NewRepo()
+	var repo user.UserRepo = user.ProvideInMemoryUserRepo()
 
 	repo.Save(user.New("test", "123qweasd"))
 
@@ -32,7 +32,7 @@ func TestAuth_ServerHTTP(t *testing.T) {
 	req, _ := http.NewRequest(http.MethodPost, "/user/login", &b)
 	resp := httptest.NewRecorder()
 
-	h := NewAuth(repo)
+	h := ProvideAuth(repo)
 	h.ServeHTTP(resp, req)
 
 	got := resp.Result().StatusCode

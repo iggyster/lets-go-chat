@@ -6,7 +6,7 @@ import (
 )
 
 func TestNewRepo(t *testing.T) {
-	var repo UserRepo = NewRepo()
+	var repo UserRepo = ProvideInMemoryUserRepo()
 
 	_, ok := repo.(UserRepo)
 	if !ok {
@@ -15,7 +15,7 @@ func TestNewRepo(t *testing.T) {
 }
 
 func TestInMemoryRepo_FindByUser_InvalidType(t *testing.T) {
-	var repo = NewRepo()
+	var repo = ProvideInMemoryUserRepo()
 
 	key := "username"
 	repo.Store(key, "not a user")
@@ -27,7 +27,7 @@ func TestInMemoryRepo_FindByUser_InvalidType(t *testing.T) {
 }
 
 func TestInMemoryRepo_FindByToken(t *testing.T) {
-	var repo UserRepo = NewRepo()
+	var repo UserRepo = ProvideInMemoryUserRepo()
 
 	usr := New("test", "pass")
 	usr.SetToken("token")
@@ -41,7 +41,7 @@ func TestInMemoryRepo_FindByToken(t *testing.T) {
 }
 
 func TestInMemoryRepo_FindActivated(t *testing.T) {
-	var repo UserRepo = NewRepo()
+	var repo UserRepo = ProvideInMemoryUserRepo()
 
 	usr := New("test", "pass")
 	usr.Activate()
@@ -55,7 +55,7 @@ func TestInMemoryRepo_FindActivated(t *testing.T) {
 }
 
 func TestInMemoryRepo_IsExists(t *testing.T) {
-	var repo UserRepo = NewRepo()
+	var repo UserRepo = ProvideInMemoryUserRepo()
 
 	usr := New("test", "pass")
 	repo.Save(usr)
@@ -66,7 +66,7 @@ func TestInMemoryRepo_IsExists(t *testing.T) {
 }
 
 func ExampleUserRepo_FindByUsername() {
-	var repo UserRepo = NewRepo()
+	var repo UserRepo = ProvideInMemoryUserRepo()
 
 	name := "test"
 	usr := New(name, "pass")
@@ -88,7 +88,7 @@ func ExampleUserRepo_FindByUsername() {
 }
 
 func ExampleUserRepo_FindByToken() {
-	var repo UserRepo = NewRepo()
+	var repo UserRepo = ProvideInMemoryUserRepo()
 
 	usr := New("test", "pass")
 	usr.SetToken("token")
@@ -110,7 +110,7 @@ func ExampleUserRepo_FindByToken() {
 }
 
 func BenchmarkFindByUsername(b *testing.B) {
-	var repo UserRepo = NewRepo()
+	var repo UserRepo = ProvideInMemoryUserRepo()
 
 	usr := New("test", "pass")
 	repo.Save(usr)
@@ -122,7 +122,7 @@ func BenchmarkFindByUsername(b *testing.B) {
 }
 
 func BenchmarkFindByToken(b *testing.B) {
-	var repo UserRepo = NewRepo()
+	var repo UserRepo = ProvideInMemoryUserRepo()
 
 	usr := New("test", "pass")
 	usr.SetToken("token")
@@ -135,7 +135,7 @@ func BenchmarkFindByToken(b *testing.B) {
 }
 
 func BenchmarkIsExists(b *testing.B) {
-	var repo UserRepo = NewRepo()
+	var repo UserRepo = ProvideInMemoryUserRepo()
 
 	usr := New("test", "pass")
 	repo.Save(usr)
