@@ -9,11 +9,11 @@ import (
 	"github.com/iggyster/lets-go-chat/internal/chat"
 	"github.com/iggyster/lets-go-chat/internal/db"
 	"github.com/iggyster/lets-go-chat/internal/user"
+	"github.com/iggyster/lets-go-chat/mocks"
 )
 
 func TestNewChat(t *testing.T) {
-	db, _, _ := db.ProvideClient()
-	messageRepo := chat.ProvideMessageRepo(db)
+	messageRepo := mocks.NewMessageRepo(t)
 
 	var h Any = ProvideChat(user.ProvideInMemoryUserRepo(), messageRepo, chat.NewHub(messageRepo))
 
