@@ -18,7 +18,3 @@ func (a *Active) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 	json.NewEncoder(w).Encode(users)
 }
-
-func NewActive(repo user.UserRepo) *Active {
-	return &Active{Repo: repo}
-}

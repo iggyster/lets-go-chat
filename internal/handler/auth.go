@@ -27,10 +27,6 @@ type (
 	}
 )
 
-func NewAuth(repo user.UserRepo) *Auth {
-	return &Auth{Repo: repo}
-}
-
 func (handler *Auth) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 

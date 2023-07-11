@@ -1,47 +1,31 @@
 package main
 
 import (
-	"context"
 	"os"
 
 	"github.com/iggyster/lets-go-chat/internal/app"
-	"github.com/iggyster/lets-go-chat/internal/chat"
-	"github.com/iggyster/lets-go-chat/internal/db"
-	"github.com/iggyster/lets-go-chat/internal/handler"
 	"github.com/iggyster/lets-go-chat/internal/middleware"
-	"github.com/iggyster/lets-go-chat/internal/user"
-)
-
-var (
-	userRepo    user.UserRepo
-	messageRepo chat.MessageRepo
 )
 
 func main() {
 	app.InitEnv()
 
-	db := db.NewMongoClient()
-	defer func() {
-		if err := db.Disconnect(context.TODO()); err != nil {
-			panic(err)
-		}
-	}()
+	db, disconnect, _ := initializeDb()
+	defer disconnect()
 
-	userRepo = user.NewRepo()
-	messageRepo = chat.NewRepo(db)
-
-	hub := chat.NewHub(messageRepo)
-	app := app.New(":" + os.Getenv("APP_PORT"))
-
+	hub := initializeHub(db)
 	go hub.Run()
+
+	handlers := initializeHandlers(db, hub)
+	app := initializeApp(":" + os.Getenv("APP_PORT"))
 
 	app.Use(middleware.Recover)
 	app.Use(middleware.Logger)
 
-	app.Post("/user", handler.NewRegister(userRepo))
-	app.Post("/user/login", handler.NewAuth(userRepo))
-	app.Get("/ws", handler.NewChatHandler(userRepo, messageRepo, hub))
-	app.Get("/users/active", handler.NewActive(userRepo))
+	app.Post("/user", handlers.Register)
+	app.Post("/user/login", handlers.Auth)
+	app.Get("/ws", handlers.Chat)
+	app.Get("/users/active", handlers.Active)
 
 	app.Start()
 }

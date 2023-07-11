@@ -16,10 +16,6 @@ type MongoMessageRepo struct {
 	client *mongo.Client
 }
 
-func NewRepo(client *mongo.Client) MessageRepo {
-	return &MongoMessageRepo{client: client}
-}
-
 func (repo *MongoMessageRepo) FindAll() []Msg {
 	var res []Msg
 

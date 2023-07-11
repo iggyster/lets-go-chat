@@ -13,10 +13,6 @@ type (
 	}
 )
 
-func NewRegister(repo user.UserRepo) *Register {
-	return &Register{Repo: repo}
-}
-
 func (handler *Register) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 

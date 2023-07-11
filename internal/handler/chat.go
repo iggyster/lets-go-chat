@@ -14,14 +14,6 @@ type ChatHandler struct {
 	hub         *chat.Hub
 }
 
-func NewChatHandler(userRepo user.UserRepo, messageRepo chat.MessageRepo, hub *chat.Hub) *ChatHandler {
-	return &ChatHandler{
-		userRepo:    userRepo,
-		messageRepo: messageRepo,
-		hub:         hub,
-	}
-}
-
 func (chatHandler *ChatHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	token := req.URL.Query().Get("token")
 	if token == "" {
