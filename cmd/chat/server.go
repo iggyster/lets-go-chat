@@ -3,10 +3,18 @@ package main
 import (
 	"os"
 
+	_ "github.com/iggyster/lets-go-chat/docs"
 	"github.com/iggyster/lets-go-chat/internal/app"
 	"github.com/iggyster/lets-go-chat/internal/middleware"
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
+//	@title			Let's Go Chat
+//	@version		1.0
+//	@description	Chat application to practise Golang
+
+// @host		localhost:8080
+// @BasePath	/
 func main() {
 	app.InitEnv()
 
@@ -26,6 +34,7 @@ func main() {
 	app.Post("/user/login", handlers.Auth)
 	app.Get("/ws", handlers.Chat)
 	app.Get("/users/active", handlers.Active)
+	app.Get("/swagger/doc.json", httpSwagger.Handler())
 
 	app.Start()
 }

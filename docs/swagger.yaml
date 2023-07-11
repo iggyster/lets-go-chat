@@ -1,0 +1,133 @@
+basePath: /
+definitions:
+  handler.AuthRequest:
+    properties:
+      password:
+        type: string
+      userName:
+        type: string
+    type: object
+  handler.AuthResponse:
+    properties:
+      url:
+        type: string
+    type: object
+  handler.Error:
+    properties:
+      detail:
+        type: string
+      field:
+        type: string
+      message:
+        type: string
+    type: object
+  handler.Errors:
+    properties:
+      errors:
+        items:
+          $ref: '#/definitions/handler.Error'
+        type: array
+    type: object
+  user.User:
+    properties:
+      id:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Chat application to practise Golang
+  title: Let's Go Chat
+  version: "1.0"
+paths:
+  /user:
+    post:
+      consumes:
+      - application/json
+      description: 'Authenticate user by credentials: username/password'
+      parameters:
+      - description: Register request
+        in: body
+        name: auth_request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.AuthRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.User'
+        "422":
+          description: Validation errors
+          schema:
+            $ref: '#/definitions/handler.Errors'
+      summary: Auth
+      tags:
+      - users
+  /user/active:
+    get:
+      consumes:
+      - application/json
+      description: Gets users list connected to the chat
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/user.User'
+            type: array
+      summary: Active
+      tags:
+      - users
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      description: 'Authenticate user by credentials: username/password'
+      parameters:
+      - description: Auth request
+        in: body
+        name: auth_request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.AuthRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.AuthResponse'
+        "400":
+          description: Invalid credentials
+          schema:
+            type: string
+      summary: Auth
+      tags:
+      - users
+  /ws:
+    get:
+      consumes:
+      - application/json
+      description: Websocket to connect Chat application
+      parameters:
+      - description: Access token to login to the chat
+        in: query
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "101":
+          description: Switching Protocols
+      summary: Chat
+      tags:
+      - chat
+swagger: "2.0"
