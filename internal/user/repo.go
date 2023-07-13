@@ -17,10 +17,6 @@ type InMemoryUserRepo struct {
 	sync.Map
 }
 
-func NewRepo() *InMemoryUserRepo {
-	return &InMemoryUserRepo{}
-}
-
 func (repo *InMemoryUserRepo) FindByUsername(username string) (*User, error) {
 	val, ok := repo.Load(username)
 	if !ok {

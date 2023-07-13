@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func NewMongoClient() *mongo.Client {
+func ProvideClient() (*mongo.Client, func(), error) {
 	uri := os.Getenv("MONGO_URI")
 	opts := options.Client().ApplyURI(uri)
 
@@ -25,5 +25,9 @@ func NewMongoClient() *mongo.Client {
 
 	log.Println("mongo db connection is established")
 
-	return client
+	return client, func() {
+		if err := client.Disconnect(context.TODO()); err != nil {
+			panic(err)
+		}
+	}, nil
 }

@@ -27,10 +27,15 @@ type (
 	}
 )
 
-func NewAuth(repo user.UserRepo) *Auth {
-	return &Auth{Repo: repo}
-}
-
+//	@Summary		Auth
+//	@Description	Authenticate user by credentials: username/password
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Param			auth_request	body		AuthRequest	true	"Auth request"
+//	@Success		200				{object}	AuthResponse
+//	@failure		400				{string}	string	"Invalid credentials"
+//	@Router			/user/login [post]
 func (handler *Auth) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 

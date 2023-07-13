@@ -18,7 +18,7 @@ func (r *Router) Add(method string, path string, handler http.Handler) {
 	r.routes[method+path] = handler
 }
 
-func (r *Router) Find(method string, path string) http.Handler {
+func (r *Router) Find(method, path string) http.Handler {
 	h, ok := r.routes[method+path]
 	if !ok {
 		h = &handler.NotFound{}

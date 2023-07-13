@@ -11,7 +11,7 @@ import (
 )
 
 func TestNewRegister(t *testing.T) {
-	var h Any = NewRegister(user.NewRepo())
+	var h Any = ProvideRegister(user.ProvideInMemoryUserRepo())
 	_, ok := h.(*Register)
 	if !ok {
 		t.Errorf("faile to create new register handler")
@@ -20,14 +20,14 @@ func TestNewRegister(t *testing.T) {
 
 func TestRegister_ServerHTTP(t *testing.T) {
 	var b bytes.Buffer
-	var repo user.UserRepo = user.NewRepo()
+	var repo user.UserRepo = user.ProvideInMemoryUserRepo()
 
 	json.NewEncoder(&b).Encode(AuthRequest{Username: "test", Password: "123qweasd"})
 
 	req := httptest.NewRequest(http.MethodPost, "/user", &b)
 	resp := httptest.NewRecorder()
 
-	h := NewRegister(repo)
+	h := ProvideRegister(repo)
 	h.ServeHTTP(resp, req)
 
 	got := resp.Result().StatusCode
@@ -38,7 +38,7 @@ func TestRegister_ServerHTTP(t *testing.T) {
 }
 
 func TestRegister_Validate(t *testing.T) {
-	var repo user.UserRepo = user.NewRepo()
+	var repo user.UserRepo = user.ProvideInMemoryUserRepo()
 
 	repo.Save(user.New("test", "secret-password"))
 
@@ -57,7 +57,7 @@ func TestRegister_Validate(t *testing.T) {
 			req := httptest.NewRequest(http.MethodPost, "/user", bytes.NewReader(jsonBody))
 			resp := httptest.NewRecorder()
 
-			h := NewRegister(repo)
+			h := ProvideRegister(repo)
 			h.ServeHTTP(resp, req)
 
 			got := resp.Result().StatusCode

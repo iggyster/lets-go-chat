@@ -15,7 +15,7 @@ type (
 	MiddlewareFunc func(next http.Handler) http.Handler
 )
 
-func New(addr string) *App {
+func ProvideApp(addr string) *App {
 	app := &App{
 		server: new(http.Server),
 		router: NewRouter(),

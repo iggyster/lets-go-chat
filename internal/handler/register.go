@@ -13,10 +13,15 @@ type (
 	}
 )
 
-func NewRegister(repo user.UserRepo) *Register {
-	return &Register{Repo: repo}
-}
-
+//	@Summary		Auth
+//	@Description	Authenticate user by credentials: username/password
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Param			auth_request	body		AuthRequest	true	"Register request"
+//	@Success		200				{object}	user.User
+//	@failure		422				{object}	Errors	"Validation errors"
+//	@Router			/user [post]
 func (handler *Register) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 

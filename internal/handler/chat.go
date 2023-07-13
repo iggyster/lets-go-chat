@@ -14,14 +14,14 @@ type ChatHandler struct {
 	hub         *chat.Hub
 }
 
-func NewChatHandler(userRepo user.UserRepo, messageRepo chat.MessageRepo, hub *chat.Hub) *ChatHandler {
-	return &ChatHandler{
-		userRepo:    userRepo,
-		messageRepo: messageRepo,
-		hub:         hub,
-	}
-}
-
+//	@Summary		Chat
+//	@Description	Websocket to connect Chat application
+//	@Tags			chat
+//	@Accept			json
+//	@Produce		json
+//	@Param			token	query	string	true	"Access token to login to the chat"
+//	@Success		101
+//	@Router			/ws [get]
 func (chatHandler *ChatHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	token := req.URL.Query().Get("token")
 	if token == "" {
