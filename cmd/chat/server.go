@@ -39,6 +39,7 @@ func main() {
 
 	app.Get("/profiler/cpu", app.Handler(pprof.Profile))
 	app.Get("/profiler/mem", pprof.Handler("heap"))
+	app.Get("/profiler/alloc", pprof.Handler("allocs"))
 
 	app.Start()
 }

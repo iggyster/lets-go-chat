@@ -1,0 +1,775 @@
+<svg width="936" height="881" viewBox="0 0 702 660.75" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="translate(47.419403892944025,658.6064476885646) scale(0.5358880778588808)">
+<title>unnamed</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-1229 1137,-1229 1137,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_L</title>
+<polygon fill="none" stroke="black" points="8,-1097.2 8,-1217 480,-1217 480,-1097.2 8,-1097.2"/>
+</g>
+<!-- Type: cpu -->
+<g id="node1" class="node">
+<title style="">Type: alloc_space</title>
+<polygon fill="#f8f8f8" stroke="black" points="471.52,-1208.9 16.48,-1208.9 16.48,-1105.3 471.52,-1105.3 471.52,-1208.9" style=""/>
+<text text-anchor="start" x="24.24" y="-1190.6" font-family="Times,serif" font-size="16.00">Type: alloc_space</text>
+<text text-anchor="start" x="24.24" y="-1171.4" font-family="Times,serif" font-size="16.00">Time: Jul 15, 2023 at 4:09pm (EEST)</text>
+<text text-anchor="start" x="24.24" y="-1152.2" font-family="Times,serif" font-size="16.00">Showing nodes accounting for 8776.47kB, 100% of 8776.47kB total</text>
+<text text-anchor="start" x="24.24" y="-1114" font-family="Times,serif" font-size="16.00">See https://git.io/JfYMW for how to read the graph</text>
+</g>
+<!-- N1 -->
+<g id="node1" class="node">
+<title>N1</title>
+<g id="a_node1"><a xlink:title="golang.org/x/net/webdav.(*memFile).Write (7239.84kB)">
+<polygon fill="#edd6d5" stroke="#b20a00" points="644.98,-863.7 427.02,-863.7 427.02,-740.3 644.98,-740.3 644.98,-863.7"/>
+<text text-anchor="middle" x="536" y="-838" font-family="Times,serif" font-size="24">webdav</text>
+<text text-anchor="middle" x="536" y="-809.2" font-family="Times,serif" font-size="24">(*memFile)</text>
+<text text-anchor="middle" x="536" y="-780.4" font-family="Times,serif" font-size="24">Write</text>
+<text text-anchor="middle" x="536" y="-751.6" font-family="Times,serif" font-size="24">7239.84kB (82.49%)</text>
+</a>
+</g>
+</g>
+<!-- N4 -->
+<g id="node4" class="node">
+<title>N4</title>
+<g id="a_node4"><a xlink:title="regexp/syntax.(*compiler).inst (1024.62kB)">
+<polygon fill="#ede5df" stroke="#b27b4a" points="1105.24,-168.8 962.76,-168.8 962.76,-88.8 1105.24,-88.8 1105.24,-168.8"/>
+<text text-anchor="middle" x="1034" y="-151.29999999999995" font-family="Times,serif" font-size="15">syntax</text>
+<text text-anchor="middle" x="1034" y="-133.29999999999995" font-family="Times,serif" font-size="15">(*compiler)</text>
+<text text-anchor="middle" x="1034" y="-115.29999999999995" font-family="Times,serif" font-size="15">inst</text>
+<text text-anchor="middle" x="1034" y="-97.29999999999995" font-family="Times,serif" font-size="15">1024.62kB (11.67%)</text>
+</a>
+</g>
+</g><g id="NN1_0" class="node">
+<title style="">NN1_0</title>
+<g id="a_NN1_0"><a xlink:title="2709.05kB" style="">
+<polygon fill="#f8f8f8" stroke="black" points="437.79,-670.4 374.21,-670.4 370.21,-666.4 370.21,-634.4 433.79,-634.4 437.79,-638.4 437.79,-670.4" style=""/>
+<polyline fill="none" stroke="black" points="433.79,-666.4 370.21,-666.4 " style=""/>
+<polyline fill="none" stroke="black" points="433.79,-666.4 433.79,-634.4 " style=""/>
+<polyline fill="none" stroke="black" points="433.79,-666.4 437.79,-670.4 " style=""/>
+<text text-anchor="middle" x="404" y="-650" font-family="Times,serif" font-size="8.00">368kB..1.02MB</text>
+</a>
+</g>
+</g>
+<!-- N1&#45;&gt;N4 -->
+<g id="edge1" class="edge">
+<title style="">N1-&gt;NN1_0</title>
+<g id="a_edge1"><a xlink:title="2709.05kB" style="">
+<path fill="none" stroke="black" d="M435.48,-740.16C430.02,-734.6 425,-728.68 420.66,-722.4 412.26,-710.24 408.07,-694.33 406,-680.85"/>
+<polygon fill="black" stroke="black" points="409.44,-680.18 404.74,-670.68 402.49,-681.03 409.44,-680.18" style=""/>
+</a>
+</g>
+<g id="a_edge1-label"><a xlink:title="2709.05kB" style="">
+<text text-anchor="middle" x="453.67" y="-701.4" font-family="Times,serif" font-size="14.00"> 2709.05kB</text>
+</a>
+</g>
+</g>
+<!-- N21 -->
+<g id="node21" class="node">
+<title>N21</title>
+<g id="a_node21"><a xlink:title="regexp/syntax.(*compiler).rune (1024.62kB)">
+<polygon fill="#ede5df" stroke="#b27b4a" points="1082.99,-285 985.01,-285 985.01,-238.2 1082.99,-238.2 1082.99,-285"/>
+<text text-anchor="middle" x="1034" y="-273.5999999999999" font-family="Times,serif" font-size="8.00">syntax</text>
+<text text-anchor="middle" x="1034" y="-264" font-family="Times,serif" font-size="8.00">(*compiler)</text>
+<text text-anchor="middle" x="1034" y="-254.4000000000001" font-family="Times,serif" font-size="8.00">rune</text>
+<text text-anchor="middle" x="1034" y="-244.79999999999995" font-family="Times,serif" font-size="8.00">0 of 1024.62kB (11.67%)</text>
+</a>
+</g>
+</g><g id="NN1_1" class="node">
+<title style="">NN1_1</title>
+<g id="a_NN1_1"><a xlink:title="1595.23kB" style="">
+<polygon fill="#f8f8f8" stroke="black" points="519,-670.4 469,-670.4 465,-666.4 465,-634.4 515,-634.4 519,-638.4 519,-670.4" style=""/>
+<polyline fill="none" stroke="black" points="515,-666.4 465,-666.4 " style=""/>
+<polyline fill="none" stroke="black" points="515,-666.4 515,-634.4 " style=""/>
+<polyline fill="none" stroke="black" points="515,-666.4 519,-670.4 " style=""/>
+<text text-anchor="middle" x="492" y="-650" font-family="Times,serif" font-size="8.00">1.48MB</text>
+</a>
+</g>
+</g>
+<!-- N1&#45;&gt;N21 -->
+<g id="edge2" class="edge">
+<title style="">N1-&gt;NN1_1</title>
+<g id="a_edge2"><a xlink:title="1595.23kB" style="">
+<path fill="none" stroke="black" d="M498.7,-739.99C496.28,-734.19 494.21,-728.28 492.66,-722.4 489.12,-708.91 488.66,-693.42 489.22,-680.54"/>
+<polygon fill="black" stroke="black" points="492.72,-680.64 489.87,-670.44 485.73,-680.19 492.72,-680.64" style=""/>
+</a>
+</g>
+<g id="a_edge2-label"><a xlink:title="1595.23kB" style="">
+<text text-anchor="middle" x="525.67" y="-701.4" font-family="Times,serif" font-size="14.00"> 1595.23kB</text>
+</a>
+</g>
+</g>
+<!-- N2 -->
+<g id="node2" class="node">
+<title>N2</title>
+<g id="a_node2"><a xlink:title="runtime.doInit (8776.47kB)">
+<polygon fill="#edd5d5" stroke="#b20000" points="581.99,-1052.3 490.01,-1052.3 490.01,-1015.7 581.99,-1015.7 581.99,-1052.3"/>
+<text text-anchor="middle" x="536" y="-1041.2" font-family="Times,serif" font-size="8">runtime</text>
+<text text-anchor="middle" x="536" y="-1031.6" font-family="Times,serif" font-size="8">doInit</text>
+<text text-anchor="middle" x="536" y="-1022" font-family="Times,serif" font-size="8">0 of 8776.47kB (100%)</text>
+</a>
+</g>
+</g><g id="NN1_2" class="node">
+<title style="">NN1_2</title>
+<g id="a_NN1_2"><a xlink:title="1588.17kB" style="">
+<polygon fill="#f8f8f8" stroke="black" points="607,-670.4 557,-670.4 553,-666.4 553,-634.4 603,-634.4 607,-638.4 607,-670.4" style=""/>
+<polyline fill="none" stroke="black" points="603,-666.4 553,-666.4 " style=""/>
+<polyline fill="none" stroke="black" points="603,-666.4 603,-634.4 " style=""/>
+<polyline fill="none" stroke="black" points="603,-666.4 607,-670.4 " style=""/>
+<text text-anchor="middle" x="580" y="-650" font-family="Times,serif" font-size="8.00">1.47MB</text>
+</a>
+</g>
+</g>
+<!-- N9 -->
+<g id="node9" class="node">
+<title>N9</title>
+<g id="a_node9"><a xlink:title="encoding/gob.registerBasics (512.01kB)">
+<polygon fill="#edeae6" stroke="#b29c7e" points="236.99,-820.3 147.01,-820.3 147.01,-783.7 236.99,-783.7 236.99,-820.3"/>
+<text text-anchor="middle" x="192" y="-809.2" font-family="Times,serif" font-size="8">gob</text>
+<text text-anchor="middle" x="192" y="-799.6000000000001" font-family="Times,serif" font-size="8">registerBasics</text>
+<text text-anchor="middle" x="192" y="-790" font-family="Times,serif" font-size="8">0 of 512.01kB (5.83%)</text>
+</a>
+</g>
+</g><g id="edge3" class="edge">
+<title style="">N1-&gt;NN1_2</title>
+<g id="a_edge3"><a xlink:title="1588.17kB" style="">
+<path fill="none" stroke="black" d="M554.15,-740.11C560.38,-719.2 567.04,-696.86 572.04,-680.09"/>
+<polygon fill="black" stroke="black" points="575.42,-681.02 574.92,-670.44 568.71,-679.02 575.42,-681.02" style=""/>
+</a>
+</g>
+<g id="a_edge3-label"><a xlink:title="1588.17kB" style="">
+<text text-anchor="middle" x="601.67" y="-701.4" font-family="Times,serif" font-size="14.00"> 1588.17kB</text>
+</a>
+</g>
+</g>
+<!-- N2&#45;&gt;N9 -->
+<g id="NN1_3" class="node">
+<title style="">NN1_3</title>
+<g id="a_NN1_3"><a xlink:title="1347.38kB" style="">
+<polygon fill="#f8f8f8" stroke="black" points="695,-670.4 645,-670.4 641,-666.4 641,-634.4 691,-634.4 695,-638.4 695,-670.4" style=""/>
+<polyline fill="none" stroke="black" points="691,-666.4 641,-666.4 " style=""/>
+<polyline fill="none" stroke="black" points="691,-666.4 691,-634.4 " style=""/>
+<polyline fill="none" stroke="black" points="691,-666.4 695,-670.4 " style=""/>
+<text text-anchor="middle" x="668" y="-650" font-family="Times,serif" font-size="8.00">1.20MB</text>
+</a>
+</g>
+</g>
+<!-- N3 -->
+<g id="node3" class="node">
+<title>N3</title>
+<g id="a_node3"><a xlink:title="runtime.main (8776.47kB)">
+<polygon fill="#edd5d5" stroke="#b20000" points="581.99,-1175.4 490.01,-1175.4 490.01,-1138.8 581.99,-1138.8 581.99,-1175.4"/>
+<text text-anchor="middle" x="536" y="-1164.3" font-family="Times,serif" font-size="8.00">runtime</text>
+<text text-anchor="middle" x="536" y="-1154.7" font-family="Times,serif" font-size="8.00">main</text>
+<text text-anchor="middle" x="536" y="-1145.1" font-family="Times,serif" font-size="8.00">0 of 8776.47kB (100%)</text>
+</a>
+</g>
+</g><g id="edge4" class="edge">
+<title style="">N1-&gt;NN1_3</title>
+<g id="a_edge4"><a xlink:title="1347.38kB" style="">
+<path fill="none" stroke="black" d="M622.05,-740.2C627.79,-734.52 633.19,-728.57 638,-722.4 647.73,-709.92 654.97,-693.81 659.89,-680.29"/>
+<polygon fill="black" stroke="black" points="663.3,-681.15 663.21,-670.56 656.67,-678.89 663.3,-681.15" style=""/>
+</a>
+</g>
+<g id="a_edge4-label"><a xlink:title="1347.38kB" style="">
+<text text-anchor="middle" x="687.67" y="-701.4" font-family="Times,serif" font-size="14.00"> 1347.38kB</text>
+</a>
+</g>
+</g>
+<!-- N51 -->
+
+<!-- N3&#45;&gt;N51 -->
+
+<!-- N19 -->
+<g id="node19" class="node">
+<title>N19</title>
+<g id="a_node19"><a xlink:title="regexp.compile (1024.62kB)">
+<polygon fill="#ede5df" stroke="#b27b4a" points="1082.99,-572.1 985.01,-572.1 985.01,-535.5 1082.99,-535.5 1082.99,-572.1"/>
+<text text-anchor="middle" x="1034" y="-561" font-family="Times,serif" font-size="8.00">regexp</text>
+<text text-anchor="middle" x="1034" y="-551.4" font-family="Times,serif" font-size="8.00">compile</text>
+<text text-anchor="middle" x="1034" y="-541.8" font-family="Times,serif" font-size="8.00">0 of 1024.62kB (11.67%)</text>
+</a>
+</g>
+</g><g id="edge33" class="edge">
+<title style="">N2-&gt;N8</title>
+<g id="a_edge33"><a xlink:title="runtime.doInit -&gt; encoding/gob.init.1 (512.01kB)" style="">
+<path fill="none" stroke="#b29c7e" d="M489.97,-1031.36C440.14,-1028.43 358.9,-1020.28 292.66,-997.6 271.95,-990.51 250.63,-979.12 232.97,-968.39"/>
+<polygon fill="#b29c7e" stroke="#b29c7e" points="234.43,-965.17 224.09,-962.86 230.73,-971.11 234.43,-965.17" style=""/>
+</a>
+</g>
+<g id="a_edge33-label"><a xlink:title="runtime.doInit -&gt; encoding/gob.init.1 (512.01kB)" style="">
+<text text-anchor="middle" x="322.17" y="-985" font-family="Times,serif" font-size="14.00"> 512.01kB</text>
+</a>
+</g>
+</g>
+<!-- N4&#45;&gt;N19 -->
+
+<!-- N20 -->
+<g id="node20" class="node">
+<title>N20</title>
+<g id="a_node20"><a xlink:title="regexp/syntax.(*compiler).compile (1024.62kB)">
+<polygon fill="#ede5df" stroke="#b27b4a" points="1082.99,-384.2 985.01,-384.2 985.01,-337.4 1082.99,-337.4 1082.99,-384.2"/>
+<text text-anchor="middle" x="1034" y="-372.79999999999995" font-family="Times,serif" font-size="8.00">syntax</text>
+<text text-anchor="middle" x="1034" y="-363.20000000000005" font-family="Times,serif" font-size="8.00">(*compiler)</text>
+<text text-anchor="middle" x="1034" y="-353.6" font-family="Times,serif" font-size="8.00">compile</text>
+<text text-anchor="middle" x="1034" y="-344" font-family="Times,serif" font-size="8.00">0 of 1024.62kB (11.67%)</text>
+</a>
+</g>
+</g><g id="edge13" class="edge">
+<title style="">N2-&gt;N10</title>
+<g id="a_edge13"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.10 (1347.38kB)" style="">
+<path fill="none" stroke="#b26429" d="M489.84,-1027.43C458.31,-1022.44 416.16,-1013.39 381.66,-997.6 365.79,-990.34 349.96,-979.52 336.77,-969.26"/>
+<polygon fill="#b26429" stroke="#b26429" points="338.91,-966.5 328.92,-962.98 334.54,-971.96 338.91,-966.5" style=""/>
+</a>
+</g>
+<g id="a_edge13-label"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.10 (1347.38kB)" style="">
+<text text-anchor="middle" x="414.67" y="-985" font-family="Times,serif" font-size="14.00"> 1347.38kB</text>
+</a>
+</g>
+</g>
+<!-- N4&#45;&gt;N20 -->
+
+<!-- N5 -->
+<g id="node5" class="node">
+<title>N5</title>
+<g id="a_node5"><a xlink:title="regexp.MustCompile (1024.62kB)">
+<polygon fill="#ede5df" stroke="#b27b4a" points="1082.99,-820.3 985.01,-820.3 985.01,-783.7 1082.99,-783.7 1082.99,-820.3"/>
+<text text-anchor="middle" x="1034" y="-809.2" font-family="Times,serif" font-size="8.00">regexp</text>
+<text text-anchor="middle" x="1034" y="-799.6" font-family="Times,serif" font-size="8.00">MustCompile</text>
+<text text-anchor="middle" x="1034" y="-790" font-family="Times,serif" font-size="8.00">0 of 1024.62kB (11.67%)</text>
+</a>
+</g>
+</g><g id="edge15" class="edge">
+<title style="">N2-&gt;N11</title>
+<g id="a_edge15"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.11 (1197.01kB)" style="">
+<path fill="none" stroke="#b26f38" d="M495.04,-1015.62C485.26,-1010.54 475.19,-1004.47 466.66,-997.6 457.27,-990.03 448.46,-980.29 441.08,-971.02"/>
+<polygon fill="#b26f38" stroke="#b26f38" points="443.84,-968.87 434.99,-963.05 438.28,-973.12 443.84,-968.87" style=""/>
+</a>
+</g>
+<g id="a_edge15-label"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.11 (1197.01kB)" style="">
+<text text-anchor="middle" x="499.67" y="-985" font-family="Times,serif" font-size="14.00"> 1197.01kB</text>
+</a>
+</g>
+</g>
+<!-- N41 -->
+
+<!-- N5&#45;&gt;N41 -->
+<g id="edge11" class="edge">
+<title style="">N2-&gt;N12</title>
+<g id="a_edge11"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.12 (1588.17kB)" style="">
+<path fill="none" stroke="#b25110" d="M536,-1015.62C536,-1003.59 536,-987.22 536,-972.84"/>
+<polygon fill="#b25110" stroke="#b25110" points="539.5,-972.81 536,-962.81 532.5,-972.81 539.5,-972.81" style=""/>
+</a>
+</g>
+<g id="a_edge11-label"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.12 (1588.17kB)" style="">
+<text text-anchor="middle" x="568.67" y="-985" font-family="Times,serif" font-size="14.00"> 1588.17kB</text>
+</a>
+</g>
+</g>
+<!-- N6 -->
+<g id="node6" class="node">
+<title>N6</title>
+<g id="a_node6"><a xlink:title="encoding/gob.RegisterName (512.01kB)">
+<polygon fill="#edeae6" stroke="#b29c7e" points="248.41,-581.1 135.59,-581.1 135.59,-526.5 248.41,-526.5 248.41,-581.1"/>
+<text text-anchor="middle" x="192" y="-565.5" font-family="Times,serif" font-size="13">gob</text>
+<text text-anchor="middle" x="192" y="-549.9" font-family="Times,serif" font-size="13">RegisterName</text>
+<text text-anchor="middle" x="192" y="-534.3" font-family="Times,serif" font-size="13">512.01kB (5.83%)</text>
+</a>
+</g>
+</g>
+<!-- N6&#45;&gt;N2 -->
+<g id="edge23" class="edge">
+<title style="">N2-&gt;N13</title>
+<g id="a_edge23"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.14 (794.19kB)" style="">
+<path fill="none" stroke="#b28b61" d="M577.31,-1015.64C586.93,-1010.59 596.76,-1004.53 605,-997.6 613.93,-990.09 622.11,-980.39 628.89,-971.13"/>
+<polygon fill="#b28b61" stroke="#b28b61" points="631.83,-973.02 634.69,-962.82 626.09,-969.01 631.83,-973.02" style=""/>
+</a>
+</g>
+<g id="a_edge23-label"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.14 (794.19kB)" style="">
+<text text-anchor="middle" x="650.17" y="-985" font-family="Times,serif" font-size="14.00"> 794.19kB</text>
+</a>
+</g>
+</g>
+<!-- N7 -->
+<g id="node7" class="node">
+<title>N7</title>
+<g id="a_node7"><a xlink:title="encoding/gob.Register (512.01kB)">
+<polygon fill="#edeae6" stroke="#b29c7e" points="236.99,-670.7 147.01,-670.7 147.01,-634.1 236.99,-634.1 236.99,-670.7"/>
+<text text-anchor="middle" x="192" y="-659.6" font-family="Times,serif" font-size="8">gob</text>
+<text text-anchor="middle" x="192" y="-650" font-family="Times,serif" font-size="8">Register</text>
+<text text-anchor="middle" x="192" y="-640.4" font-family="Times,serif" font-size="8">0 of 512.01kB (5.83%)</text>
+</a>
+</g>
+</g>
+<!-- N8 -->
+<g id="node8" class="node">
+<title>N8</title>
+<g id="a_node8"><a xlink:title="encoding/gob.init0.10000000000000142 (512.01kB)">
+<polygon fill="#edeae6" stroke="#b29c7e" points="236.99,-963 147.01,-963 147.01,-916.2 236.99,-916.2 236.99,-963"/>
+<text text-anchor="middle" x="192" y="-951.6" font-family="Times,serif" font-size="8.00">gob</text>
+<text text-anchor="middle" x="192" y="-942" font-family="Times,serif" font-size="8.00">init</text>
+<text text-anchor="middle" x="192" y="-932.4000000000001" font-family="Times,serif" font-size="8.00">1</text>
+<text text-anchor="middle" x="192" y="-922.8" font-family="Times,serif" font-size="8.00">0 of 512.01kB (5.83%)</text>
+</a>
+</g>
+</g><g id="edge9" class="edge">
+<title style="">N2-&gt;N14</title>
+<g id="a_edge9"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.8 (1595.23kB)" style="">
+<path fill="none" stroke="#b25110" d="M582.29,-1026.74C612.06,-1021.55 651.01,-1012.54 683,-997.6 698.58,-990.33 714.13,-979.64 727.13,-969.47"/>
+<polygon fill="#b25110" stroke="#b25110" points="729.69,-971.91 735.29,-962.91 725.3,-966.45 729.69,-971.91" style=""/>
+</a>
+</g>
+<g id="a_edge9-label"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.8 (1595.23kB)" style="">
+<text text-anchor="middle" x="742.67" y="-985" font-family="Times,serif" font-size="14.00"> 1595.23kB</text>
+</a>
+</g>
+</g>
+<!-- N64 -->
+
+<!-- N8&#45;&gt;N64 -->
+<g id="edge25" class="edge">
+<title style="">N2-&gt;N15</title>
+<g id="a_edge25"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.9 (717.85kB)" style="">
+<path fill="none" stroke="#b29069" d="M582.12,-1031.79C632.02,-1029.23 713.26,-1021.39 779,-997.6 798.23,-990.64 817.79,-979.41 833.97,-968.75"/>
+<polygon fill="#b29069" stroke="#b29069" points="836.27,-971.42 842.59,-962.91 832.35,-965.62 836.27,-971.42" style=""/>
+</a>
+</g>
+<g id="a_edge25-label"><a xlink:title="runtime.doInit -&gt; github.com/swaggo/files.init.9 (717.85kB)" style="">
+<text text-anchor="middle" x="843.17" y="-985" font-family="Times,serif" font-size="14.00"> 717.85kB</text>
+</a>
+</g>
+</g>
+<!-- N65 -->
+
+<!-- N8&#45;&gt;N65 -->
+<g id="edge28" class="edge">
+<title style="">N2-&gt;N16</title>
+<g id="a_edge28"><a xlink:title="runtime.doInit -&gt; gopkg.in/yaml%2ev3.init (512.31kB)" style="">
+<path fill="none" stroke="#b29c7e" d="M582.25,-1033.91C648.77,-1033.95 774.59,-1029.25 876,-997.6 900.88,-989.83 926.59,-975.81 946.22,-963.61"/>
+<polygon fill="#b29c7e" stroke="#b29c7e" points="948.23,-966.48 954.79,-958.17 944.47,-960.58 948.23,-966.48" style=""/>
+</a>
+</g>
+<g id="a_edge28-label"><a xlink:title="runtime.doInit -&gt; gopkg.in/yaml%2ev3.init (512.31kB)" style="">
+<text text-anchor="middle" x="943.17" y="-985" font-family="Times,serif" font-size="14.00"> 512.31kB</text>
+</a>
+</g>
+</g>
+<!-- N10 -->
+<g id="node10" class="node">
+<title>N10</title>
+<g id="a_node10"><a xlink:title="github.com/swaggo/files.init0.10000000000000142 (1347.38kB)">
+<polygon fill="#ede2da" stroke="#b26429" points="352.99,-963 255.01,-963 255.01,-916.2 352.99,-916.2 352.99,-963"/>
+<text text-anchor="middle" x="304" y="-951.6" font-family="Times,serif" font-size="8.00">files</text>
+<text text-anchor="middle" x="304" y="-942" font-family="Times,serif" font-size="8.00">init</text>
+<text text-anchor="middle" x="304" y="-932.4" font-family="Times,serif" font-size="8.00">10</text>
+<text text-anchor="middle" x="304" y="-922.8" font-family="Times,serif" font-size="8.00">0 of 1347.38kB (15.35%)</text>
+</a>
+</g>
+</g>
+<!-- N53 -->
+<g id="edge29" class="edge">
+<title style="">N2-&gt;N17</title>
+<g id="a_edge29"><a xlink:title="runtime.doInit -&gt; internal/profile.init (512.31kB)" style="">
+<path fill="none" stroke="#b29c7e" d="M582.28,-1031.55C679.71,-1028.13 902.99,-1018.24 976,-997.6 1003,-989.97 1031.15,-975.61 1052.47,-963.22"/>
+<polygon fill="#b29c7e" stroke="#b29c7e" points="1054.35,-966.17 1061.16,-958.06 1050.78,-960.15 1054.35,-966.17" style=""/>
+</a>
+</g>
+<g id="a_edge29-label"><a xlink:title="runtime.doInit -&gt; internal/profile.init (512.31kB)" style="">
+<text text-anchor="middle" x="1046.17" y="-985" font-family="Times,serif" font-size="14.00"> 512.31kB</text>
+</a>
+</g>
+</g>
+<!-- N10&#45;&gt;N53 -->
+
+<!-- N62 -->
+<g id="edge7" class="edge">
+<title style="">N3-&gt;N2</title>
+<g id="a_edge7"><a xlink:title="runtime.main -&gt; runtime.doInit (8776.47kB)" style="">
+<path fill="none" stroke="#b20000" stroke-width="6" d="M536,-1138.75C536,-1118.79 536,-1085.75 536,-1062.32"/>
+<polygon fill="#b20000" stroke="#b20000" stroke-width="6" points="541.25,-1062.32 536,-1052.32 530.75,-1062.32 541.25,-1062.32" style=""/>
+</a>
+</g>
+<g id="a_edge7-label"><a xlink:title="runtime.main -&gt; runtime.doInit (8776.47kB)" style="">
+<text text-anchor="middle" x="568.67" y="-1074.6" font-family="Times,serif" font-size="14.00"> 8776.47kB</text>
+</a>
+</g>
+</g>
+<!-- N10&#45;&gt;N62 -->
+
+<!-- N11 -->
+<g id="node11" class="node">
+<title>N11</title>
+<g id="a_node11"><a xlink:title="github.com/swaggo/files.init0.10999999999999943 (1197.01kB)">
+<polygon fill="#ede4dc" stroke="#b26f38" points="468.99,-963 371.01,-963 371.01,-916.2 468.99,-916.2 468.99,-963"/>
+<text text-anchor="middle" x="420" y="-951.6" font-family="Times,serif" font-size="8">files</text>
+<text text-anchor="middle" x="420" y="-942" font-family="Times,serif" font-size="8">init</text>
+<text text-anchor="middle" x="420" y="-932.4" font-family="Times,serif" font-size="8">11</text>
+<text text-anchor="middle" x="420" y="-922.8" font-family="Times,serif" font-size="8.00">0 of 1197.01kB (13.64%)</text>
+</a>
+</g>
+</g><g id="NN4_0" class="node">
+<title style="">NN4_0</title>
+<g id="a_NN4_0"><a xlink:title="1024.62kB" style="">
+<polygon fill="#f8f8f8" stroke="black" points="1061,-36 1011,-36 1007,-32 1007,0 1057,0 1061,-4 1061,-36" style=""/>
+<polyline fill="none" stroke="black" points="1057,-32 1007,-32 " style=""/>
+<polyline fill="none" stroke="black" points="1057,-32 1057,0 " style=""/>
+<polyline fill="none" stroke="black" points="1057,-32 1061,-36 " style=""/>
+<text text-anchor="middle" x="1034" y="-15.6" font-family="Times,serif" font-size="8.00">640B</text>
+</a>
+</g>
+</g>
+<!-- N12 -->
+<g id="node12" class="node">
+<title>N12</title>
+<g id="a_node12"><a xlink:title="github.com/swaggo/files.init0.120000000000001 (1588.17kB)">
+<polygon fill="#ede0d7" stroke="#b25110" points="584.99,-963 487.01,-963 487.01,-916.2 584.99,-916.2 584.99,-963"/>
+<text text-anchor="middle" x="536" y="-951.6" font-family="Times,serif" font-size="8.00">files</text>
+<text text-anchor="middle" x="536" y="-942" font-family="Times,serif" font-size="8.00">init</text>
+<text text-anchor="middle" x="536" y="-932.4" font-family="Times,serif" font-size="8.00">12</text>
+<text text-anchor="middle" x="536" y="-922.8" font-family="Times,serif" font-size="8.00">0 of 1588.17kB (18.10%)</text>
+</a>
+</g>
+</g><g id="edge5" class="edge">
+<title style="">N4-&gt;NN4_0</title>
+<g id="a_edge5"><a xlink:title="1024.62kB" style="">
+<path fill="none" stroke="black" d="M1034,-88.52C1034,-74.44 1034,-58.9 1034,-46.09"/>
+<polygon fill="black" stroke="black" points="1037.5,-46.06 1034,-36.06 1030.5,-46.06 1037.5,-46.06" style=""/>
+</a>
+</g>
+<g id="a_edge5-label"><a xlink:title="1024.62kB" style="">
+<text text-anchor="middle" x="1066.67" y="-58.2" font-family="Times,serif" font-size="14.00"> 1024.62kB</text>
+</a>
+</g>
+</g>
+<!-- N57 -->
+
+<!-- N12&#45;&gt;N57 -->
+
+<!-- N13 -->
+<g id="node13" class="node">
+<title>N13</title>
+<g id="a_node13"><a xlink:title="github.com/swaggo/files.init0.14000000000000057 (794.19kB)">
+<polygon fill="#ede7e2" stroke="#b28b61" points="692.99,-963 603.01,-963 603.01,-916.2 692.99,-916.2 692.99,-963"/>
+<text text-anchor="middle" x="648" y="-951.6" font-family="Times,serif" font-size="8">files</text>
+<text text-anchor="middle" x="648" y="-942" font-family="Times,serif" font-size="8">init</text>
+<text text-anchor="middle" x="648" y="-932.4" font-family="Times,serif" font-size="8">14</text>
+<text text-anchor="middle" x="648" y="-922.8" font-family="Times,serif" font-size="8.00">0 of 794.19kB (9.05%)</text>
+</a>
+</g>
+</g><g id="edge17" class="edge">
+<title style="">N5-&gt;N18</title>
+<g id="a_edge17"><a xlink:title="regexp.MustCompile -&gt; regexp.Compile (1024.62kB)" style="">
+<path fill="none" stroke="#b27b4a" d="M1034,-783.49C1034,-758.19 1034,-711.16 1034,-681.12"/>
+<polygon fill="#b27b4a" stroke="#b27b4a" points="1037.5,-680.89 1034,-670.89 1030.5,-680.89 1037.5,-680.89" style=""/>
+</a>
+</g>
+<g id="a_edge17-label"><a xlink:title="regexp.MustCompile -&gt; regexp.Compile (1024.62kB)" style="">
+<text text-anchor="middle" x="1066.67" y="-709.8" font-family="Times,serif" font-size="14.00"> 1024.62kB</text>
+<text text-anchor="middle" x="1066.67" y="-693" font-family="Times,serif" font-size="14.00"> (inline)</text>
+</a>
+</g>
+</g>
+<!-- N14 -->
+<g id="node14" class="node">
+<title>N14</title>
+<g id="a_node14"><a xlink:title="github.com/swaggo/files.init0.8000000000000007 (1595.23kB)">
+<polygon fill="#ede0d7" stroke="#b25110" points="808.99,-963 711.01,-963 711.01,-916.2 808.99,-916.2 808.99,-963"/>
+<text text-anchor="middle" x="760" y="-951.6" font-family="Times,serif" font-size="8">files</text>
+<text text-anchor="middle" x="760" y="-942" font-family="Times,serif" font-size="8">init</text>
+<text text-anchor="middle" x="760" y="-932.4" font-family="Times,serif" font-size="8">8</text>
+<text text-anchor="middle" x="760" y="-922.8" font-family="Times,serif" font-size="8.00">0 of 1595.23kB (18.18%)</text>
+</a>
+</g>
+</g>
+<!-- N15 -->
+<g id="node15" class="node">
+<title>N15</title>
+<g id="a_node15"><a xlink:title="github.com/swaggo/files.init0.9000000000000004 (717.85kB)">
+<polygon fill="#ede8e3" stroke="#b29069" points="916.99,-963 827.01,-963 827.01,-916.2 916.99,-916.2 916.99,-963"/>
+<text text-anchor="middle" x="872" y="-951.6" font-family="Times,serif" font-size="8.00">files</text>
+<text text-anchor="middle" x="872" y="-942" font-family="Times,serif" font-size="8.00">init</text>
+<text text-anchor="middle" x="872" y="-932.4" font-family="Times,serif" font-size="8.00">9</text>
+<text text-anchor="middle" x="872" y="-922.8" font-family="Times,serif" font-size="8.00">0 of 717.85kB (8.18%)</text>
+</a>
+</g>
+</g><g id="NN6_0" class="node">
+<title style="">NN6_0</title>
+<g id="a_NN6_0"><a xlink:title="512.01kB" style="">
+<polygon fill="#f8f8f8" stroke="black" points="219,-473.2 169,-473.2 165,-469.2 165,-437.2 215,-437.2 219,-441.2 219,-473.2" style=""/>
+<polyline fill="none" stroke="black" points="215,-469.2 165,-469.2 " style=""/>
+<polyline fill="none" stroke="black" points="215,-469.2 215,-437.2 " style=""/>
+<polyline fill="none" stroke="black" points="215,-469.2 219,-473.2 " style=""/>
+<text text-anchor="middle" x="192" y="-452.8" font-family="Times,serif" font-size="8.00">16B</text>
+</a>
+</g>
+</g>
+<!-- N31 -->
+<g id="edge6" class="edge">
+<title style="">N6-&gt;NN6_0</title>
+<g id="a_edge6"><a xlink:title="512.01kB" style="">
+<path fill="none" stroke="black" d="M192,-526.4C192,-513.09 192,-496.96 192,-483.52"/>
+<polygon fill="black" stroke="black" points="195.5,-483.43 192,-473.43 188.5,-483.43 195.5,-483.43" style=""/>
+</a>
+</g>
+<g id="a_edge6-label"><a xlink:title="512.01kB" style="">
+<text text-anchor="middle" x="221.17" y="-495.8" font-family="Times,serif" font-size="14.00"> 512.01kB</text>
+</a>
+</g>
+</g>
+<!-- N15&#45;&gt;N31 -->
+
+<!-- N16 -->
+<g id="node16" class="node">
+<title>N16</title>
+<g id="a_node16"><a xlink:title="gopkg.in/yaml%2ev3.init (512.31kB)">
+<polygon fill="#edeae6" stroke="#b29c7e" points="1024.99,-957.9 935.01,-957.9 935.01,-921.3 1024.99,-921.3 1024.99,-957.9"/>
+<text text-anchor="middle" x="980" y="-946.8" font-family="Times,serif" font-size="8.00">yaml%2ev3</text>
+<text text-anchor="middle" x="980" y="-937.2" font-family="Times,serif" font-size="8.00">init</text>
+<text text-anchor="middle" x="980" y="-927.6" font-family="Times,serif" font-size="8.00">0 of 512.31kB (5.84%)</text>
+</a>
+</g>
+</g><g id="edge30" class="edge">
+<title style="">N7-&gt;N6</title>
+<g id="a_edge30"><a xlink:title="encoding/gob.Register -&gt; encoding/gob.RegisterName (512.01kB)" style="">
+<path fill="none" stroke="#b29c7e" d="M192,-633.68C192,-621.85 192,-605.85 192,-591.36"/>
+<polygon fill="#b29c7e" stroke="#b29c7e" points="195.5,-591.15 192,-581.15 188.5,-591.15 195.5,-591.15" style=""/>
+</a>
+</g>
+<g id="a_edge30-label"><a xlink:title="encoding/gob.Register -&gt; encoding/gob.RegisterName (512.01kB)" style="">
+<text text-anchor="middle" x="221.17" y="-603.4" font-family="Times,serif" font-size="14.00"> 512.01kB</text>
+</a>
+</g>
+</g>
+<!-- N36 -->
+
+<!-- N16&#45;&gt;N36 -->
+<g id="edge31" class="edge">
+<title style="">N8-&gt;N9</title>
+<g id="a_edge31"><a xlink:title="encoding/gob.init.1 -&gt; encoding/gob.registerBasics (512.01kB)" style="">
+<path fill="none" stroke="#b29c7e" d="M192,-916.21C192,-892.78 192,-855.95 192,-830.71"/>
+<polygon fill="#b29c7e" stroke="#b29c7e" points="195.5,-830.67 192,-820.67 188.5,-830.67 195.5,-830.67" style=""/>
+</a>
+</g>
+<g id="a_edge31-label"><a xlink:title="encoding/gob.init.1 -&gt; encoding/gob.registerBasics (512.01kB)" style="">
+<text text-anchor="middle" x="221.17" y="-885.8" font-family="Times,serif" font-size="14.00"> 512.01kB</text>
+</a>
+</g>
+</g>
+<!-- N17 -->
+<g id="node17" class="node">
+<title>N17</title>
+<g id="a_node17"><a xlink:title="internal/profile.init (512.31kB)">
+<polygon fill="#edeae6" stroke="#b29c7e" points="1132.99,-957.9 1043.01,-957.9 1043.01,-921.3 1132.99,-921.3 1132.99,-957.9"/>
+<text text-anchor="middle" x="1088" y="-946.8" font-family="Times,serif" font-size="8.00">profile</text>
+<text text-anchor="middle" x="1088" y="-937.2" font-family="Times,serif" font-size="8.00">init</text>
+<text text-anchor="middle" x="1088" y="-927.6" font-family="Times,serif" font-size="8.00">0 of 512.31kB (5.84%)</text>
+</a>
+</g>
+</g><g id="edge32" class="edge">
+<title style="">N9-&gt;N7</title>
+<g id="a_edge32"><a xlink:title="encoding/gob.registerBasics -&gt; encoding/gob.Register (512.01kB)" style="">
+<path fill="none" stroke="#b29c7e" d="M192,-783.49C192,-758.19 192,-711.16 192,-681.12"/>
+<polygon fill="#b29c7e" stroke="#b29c7e" points="195.5,-680.89 192,-670.89 188.5,-680.89 195.5,-680.89" style=""/>
+</a>
+</g>
+<g id="a_edge32-label"><a xlink:title="encoding/gob.registerBasics -&gt; encoding/gob.Register (512.01kB)" style="">
+<text text-anchor="middle" x="221.17" y="-701.4" font-family="Times,serif" font-size="14.00"> 512.01kB</text>
+</a>
+</g>
+</g>
+<!-- N54 -->
+<g id="edge12" class="edge">
+<title style="">N10-&gt;N1</title>
+<g id="a_edge12"><a xlink:title="github.com/swaggo/files.init.10 -&gt; golang.org/x/net/webdav.(*memFile).Write (1347.38kB)" style="">
+<path fill="none" stroke="#b26429" d="M333.6,-916.22C348.58,-905.28 367.24,-892.22 384.66,-881.6 395.24,-875.16 406.39,-868.72 417.66,-862.47"/>
+<polygon fill="#b26429" stroke="#b26429" points="419.64,-865.38 426.72,-857.49 416.27,-859.24 419.64,-865.38" style=""/>
+</a>
+</g>
+<g id="a_edge12-label"><a xlink:title="github.com/swaggo/files.init.10 -&gt; golang.org/x/net/webdav.(*memFile).Write (1347.38kB)" style="">
+<text text-anchor="middle" x="417.67" y="-885.8" font-family="Times,serif" font-size="14.00"> 1347.38kB</text>
+</a>
+</g>
+</g>
+<!-- N17&#45;&gt;N54 -->
+<g id="edge14" class="edge">
+<title style="">N11-&gt;N1</title>
+<g id="a_edge14"><a xlink:title="github.com/swaggo/files.init.11 -&gt; golang.org/x/net/webdav.(*memFile).Write (1197.01kB)" style="">
+<path fill="none" stroke="#b26f38" d="M437.98,-916.25C446.57,-905.67 457.05,-892.9 466.66,-881.6 469.52,-878.23 472.47,-874.8 475.45,-871.34"/>
+<polygon fill="#b26f38" stroke="#b26f38" points="478.13,-873.59 482.02,-863.74 472.83,-869.01 478.13,-873.59" style=""/>
+</a>
+</g>
+<g id="a_edge14-label"><a xlink:title="github.com/swaggo/files.init.11 -&gt; golang.org/x/net/webdav.(*memFile).Write (1197.01kB)" style="">
+<text text-anchor="middle" x="499.67" y="-885.8" font-family="Times,serif" font-size="14.00"> 1197.01kB</text>
+</a>
+</g>
+</g>
+<!-- N18 -->
+<g id="node18" class="node">
+<title>N18</title>
+<g id="a_node18"><a xlink:title="regexp.Compile (1024.62kB)">
+<polygon fill="#ede5df" stroke="#b27b4a" points="1082.99,-670.7 985.01,-670.7 985.01,-634.1 1082.99,-634.1 1082.99,-670.7"/>
+<text text-anchor="middle" x="1034" y="-659.6" font-family="Times,serif" font-size="8.00">regexp</text>
+<text text-anchor="middle" x="1034" y="-650" font-family="Times,serif" font-size="8.00">Compile</text>
+<text text-anchor="middle" x="1034" y="-640.4" font-family="Times,serif" font-size="8.00">0 of 1024.62kB (11.67%)</text>
+</a>
+</g>
+</g><g id="edge10" class="edge">
+<title style="">N12-&gt;N1</title>
+<g id="a_edge10"><a xlink:title="github.com/swaggo/files.init.12 -&gt; golang.org/x/net/webdav.(*memFile).Write (1588.17kB)" style="">
+<path fill="none" stroke="#b25110" d="M536,-916.21C536,-904.42 536,-889.25 536,-873.86"/>
+<polygon fill="#b25110" stroke="#b25110" points="539.5,-873.76 536,-863.76 532.5,-873.76 539.5,-873.76" style=""/>
+</a>
+</g>
+<g id="a_edge10-label"><a xlink:title="github.com/swaggo/files.init.12 -&gt; golang.org/x/net/webdav.(*memFile).Write (1588.17kB)" style="">
+<text text-anchor="middle" x="568.67" y="-885.8" font-family="Times,serif" font-size="14.00"> 1588.17kB</text>
+</a>
+</g>
+</g>
+<!-- N18&#45;&gt;N1 -->
+<g id="edge22" class="edge">
+<title style="">N13-&gt;N1</title>
+<g id="a_edge22"><a xlink:title="github.com/swaggo/files.init.14 -&gt; golang.org/x/net/webdav.(*memFile).Write (794.19kB)" style="">
+<path fill="none" stroke="#b28b61" d="M631.83,-916.38C623.93,-905.72 614.16,-892.85 605,-881.6 602.36,-878.35 599.63,-875.05 596.85,-871.74"/>
+<polygon fill="#b28b61" stroke="#b28b61" points="599.43,-869.37 590.31,-863.98 594.08,-873.88 599.43,-869.37" style=""/>
+</a>
+</g>
+<g id="a_edge22-label"><a xlink:title="github.com/swaggo/files.init.14 -&gt; golang.org/x/net/webdav.(*memFile).Write (794.19kB)" style="">
+<text text-anchor="middle" x="646.17" y="-885.8" font-family="Times,serif" font-size="14.00"> 794.19kB</text>
+</a>
+</g>
+</g>
+<!-- N23 -->
+<g id="edge8" class="edge">
+<title style="">N14-&gt;N1</title>
+<g id="a_edge8"><a xlink:title="github.com/swaggo/files.init.8 -&gt; golang.org/x/net/webdav.(*memFile).Write (1595.23kB)" style="">
+<path fill="none" stroke="#b25110" d="M729.77,-916.13C714.77,-905.29 696.21,-892.34 679,-881.6 670.97,-876.59 662.61,-871.55 654.13,-866.57"/>
+<polygon fill="#b25110" stroke="#b25110" points="655.66,-863.42 645.26,-861.41 652.14,-869.47 655.66,-863.42" style=""/>
+</a>
+</g>
+<g id="a_edge8-label"><a xlink:title="github.com/swaggo/files.init.8 -&gt; golang.org/x/net/webdav.(*memFile).Write (1595.23kB)" style="">
+<text text-anchor="middle" x="736.67" y="-885.8" font-family="Times,serif" font-size="14.00"> 1595.23kB</text>
+</a>
+</g>
+</g>
+<!-- N19&#45;&gt;N23 -->
+<g id="edge24" class="edge">
+<title style="">N15-&gt;N1</title>
+<g id="a_edge24"><a xlink:title="github.com/swaggo/files.init.9 -&gt; golang.org/x/net/webdav.(*memFile).Write (717.85kB)" style="">
+<path fill="none" stroke="#b29069" d="M837.17,-916.23C818.6,-904.9 795.08,-891.5 773,-881.6 735.44,-864.77 693.13,-849.61 654.78,-837.2"/>
+<polygon fill="#b29069" stroke="#b29069" points="655.7,-833.82 645.11,-834.1 653.57,-840.48 655.7,-833.82" style=""/>
+</a>
+</g>
+<g id="a_edge24-label"><a xlink:title="github.com/swaggo/files.init.9 -&gt; golang.org/x/net/webdav.(*memFile).Write (717.85kB)" style="">
+<text text-anchor="middle" x="832.17" y="-885.8" font-family="Times,serif" font-size="14.00"> 717.85kB</text>
+</a>
+</g>
+</g>
+<!-- N22 -->
+<g id="node22" class="node">
+<title>N22</title>
+<g id="a_node22"><a xlink:title="regexp/syntax.Compile (1024.62kB)">
+<polygon fill="#ede5df" stroke="#b27b4a" points="1082.99,-473.5 985.01,-473.5 985.01,-436.9 1082.99,-436.9 1082.99,-473.5"/>
+<text text-anchor="middle" x="1034" y="-462.4" font-family="Times,serif" font-size="8.00">syntax</text>
+<text text-anchor="middle" x="1034" y="-452.79999999999995" font-family="Times,serif" font-size="8.00">Compile</text>
+<text text-anchor="middle" x="1034" y="-443.20000000000005" font-family="Times,serif" font-size="8.00">0 of 1024.62kB (11.67%)</text>
+</a>
+</g>
+</g><g id="edge26" class="edge">
+<title style="">N16-&gt;N5</title>
+<g id="a_edge26"><a xlink:title="gopkg.in/yaml%2ev3.init -&gt; regexp.MustCompile (512.31kB)" style="">
+<path fill="none" stroke="#b29c7e" d="M986,-921.3C990,-909.95 995.46,-894.83 1000.66,-881.6 1007.51,-864.17 1015.72,-844.8 1022.28,-829.66"/>
+<polygon fill="#b29c7e" stroke="#b29c7e" points="1025.54,-830.94 1026.32,-820.37 1019.12,-828.14 1025.54,-830.94" style=""/>
+</a>
+</g>
+<g id="a_edge26-label"><a xlink:title="gopkg.in/yaml%2ev3.init -&gt; regexp.MustCompile (512.31kB)" style="">
+<text text-anchor="middle" x="1029.17" y="-885.8" font-family="Times,serif" font-size="14.00"> 512.31kB</text>
+</a>
+</g>
+</g>
+<!-- N20&#45;&gt;N22 -->
+<g id="edge27" class="edge">
+<title style="">N17-&gt;N5</title>
+<g id="a_edge27"><a xlink:title="internal/profile.init -&gt; regexp.MustCompile (512.31kB)" style="">
+<path fill="none" stroke="#b29c7e" d="M1081.05,-921.15C1071.86,-898.06 1055.56,-857.13 1044.76,-830.03"/>
+<polygon fill="#b29c7e" stroke="#b29c7e" points="1047.87,-828.38 1040.92,-820.38 1041.37,-830.97 1047.87,-828.38" style=""/>
+</a>
+</g>
+<g id="a_edge27-label"><a xlink:title="internal/profile.init -&gt; regexp.MustCompile (512.31kB)" style="">
+<text text-anchor="middle" x="1099.17" y="-885.8" font-family="Times,serif" font-size="14.00"> 512.31kB</text>
+</a>
+</g>
+</g>
+<!-- N21&#45;&gt;N1 -->
+
+<!-- N24 -->
+<g id="edge16" class="edge">
+<title style="">N18-&gt;N19</title>
+<g id="a_edge16"><a xlink:title="regexp.Compile -&gt; regexp.compile (1024.62kB)" style="">
+<path fill="none" stroke="#b27b4a" d="M1034,-633.68C1034,-619.38 1034,-599.01 1034,-582.55"/>
+<polygon fill="#b27b4a" stroke="#b27b4a" points="1037.5,-582.41 1034,-572.41 1030.5,-582.41 1037.5,-582.41" style=""/>
+</a>
+</g>
+<g id="a_edge16-label"><a xlink:title="regexp.Compile -&gt; regexp.compile (1024.62kB)" style="">
+<text text-anchor="middle" x="1066.67" y="-603.4" font-family="Times,serif" font-size="14.00"> 1024.62kB</text>
+</a>
+</g>
+</g>
+<!-- N22&#45;&gt;N24 -->
+
+<!-- N39 -->
+<g id="edge18" class="edge">
+<title style="">N19-&gt;N22</title>
+<g id="a_edge18"><a xlink:title="regexp.compile -&gt; regexp/syntax.Compile (1024.62kB)" style="">
+<path fill="none" stroke="#b27b4a" d="M1034,-535.08C1034,-520.78 1034,-500.41 1034,-483.95"/>
+<polygon fill="#b27b4a" stroke="#b27b4a" points="1037.5,-483.81 1034,-473.81 1030.5,-483.81 1037.5,-483.81" style=""/>
+</a>
+</g>
+<g id="a_edge18-label"><a xlink:title="regexp.compile -&gt; regexp/syntax.Compile (1024.62kB)" style="">
+<text text-anchor="middle" x="1066.67" y="-495.8" font-family="Times,serif" font-size="14.00"> 1024.62kB</text>
+</a>
+</g>
+</g>
+<!-- N23&#45;&gt;N39 -->
+
+<!-- N40 -->
+
+<!-- N24&#45;&gt;N40 -->
+<g id="edge19" class="edge">
+<title style="">N20-&gt;N21</title>
+<g id="a_edge19"><a xlink:title="regexp/syntax.(*compiler).compile -&gt; regexp/syntax.(*compiler).rune (1024.62kB)" style="">
+<path fill="none" stroke="#b27b4a" d="M1034,-337.26C1034,-324.74 1034,-308.96 1034,-295.13"/>
+<polygon fill="#b27b4a" stroke="#b27b4a" points="1037.5,-295.02 1034,-285.02 1030.5,-295.02 1037.5,-295.02" style=""/>
+</a>
+</g>
+<g id="a_edge19-label"><a xlink:title="regexp/syntax.(*compiler).compile -&gt; regexp/syntax.(*compiler).rune (1024.62kB)" style="">
+<text text-anchor="middle" x="1066.67" y="-307" font-family="Times,serif" font-size="14.00"> 1024.62kB</text>
+</a>
+</g>
+</g>
+<!-- N25 -->
+<g id="edge20" class="edge">
+<title style="">N21-&gt;N4</title>
+<g id="a_edge20"><a xlink:title="regexp/syntax.(*compiler).rune -&gt; regexp/syntax.(*compiler).inst (1024.62kB)" style="">
+<path fill="none" stroke="#b27b4a" d="M1034,-238.11C1034,-221.87 1034,-199.3 1034,-178.96"/>
+<polygon fill="#b27b4a" stroke="#b27b4a" points="1037.5,-178.89 1034,-168.89 1030.5,-178.89 1037.5,-178.89" style=""/>
+</a>
+</g>
+<g id="a_edge20-label"><a xlink:title="regexp/syntax.(*compiler).rune -&gt; regexp/syntax.(*compiler).inst (1024.62kB)" style="">
+<text text-anchor="middle" x="1066.67" y="-207.8" font-family="Times,serif" font-size="14.00"> 1024.62kB</text>
+<text text-anchor="middle" x="1066.67" y="-191" font-family="Times,serif" font-size="14.00"> (inline)</text>
+</a>
+</g>
+</g>
+<!-- N28 -->
+<g id="edge21" class="edge">
+<title style="">N22-&gt;N20</title>
+<g id="a_edge21"><a xlink:title="regexp/syntax.Compile -&gt; regexp/syntax.(*compiler).compile (1024.62kB)" style="">
+<path fill="none" stroke="#b27b4a" d="M1034,-436.82C1034,-424.79 1034,-408.42 1034,-394.04"/>
+<polygon fill="#b27b4a" stroke="#b27b4a" points="1037.5,-394.01 1034,-384.01 1030.5,-394.01 1037.5,-394.01" style=""/>
+</a>
+</g>
+<g id="a_edge21-label"><a xlink:title="regexp/syntax.Compile -&gt; regexp/syntax.(*compiler).compile (1024.62kB)" style="">
+<text text-anchor="middle" x="1066.67" y="-406.2" font-family="Times,serif" font-size="14.00"> 1024.62kB</text>
+</a>
+</g>
+</g>
+</g>
+</svg>
