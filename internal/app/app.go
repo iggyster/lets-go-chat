@@ -51,6 +51,10 @@ func (app *App) Start() {
 	log.Fatal(app.server.ListenAndServe())
 }
 
+func (app *App) Handler(handler http.HandlerFunc) http.Handler {
+	return http.HandlerFunc(handler)
+}
+
 func applyMiddleware(handler http.Handler, middleware ...MiddlewareFunc) http.Handler {
 	for i := len(middleware) - 1; i >= 0; i-- {
 		handler = middleware[i](handler)

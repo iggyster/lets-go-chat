@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http/pprof"
 	"os"
 
 	_ "github.com/iggyster/lets-go-chat/docs"
@@ -35,6 +36,9 @@ func main() {
 	app.Get("/ws", handlers.Chat)
 	app.Get("/users/active", handlers.Active)
 	app.Get("/swagger/doc.json", httpSwagger.Handler())
+
+	app.Get("/profiler/cpu", app.Handler(pprof.Profile))
+	app.Get("/profiler/mem", pprof.Handler("heap"))
 
 	app.Start()
 }
