@@ -8,6 +8,8 @@ import (
 	"testing"
 
 	"github.com/iggyster/lets-go-chat/internal/user"
+	"github.com/iggyster/lets-go-chat/mocks"
+	"github.com/stretchr/testify/mock"
 )
 
 type Any interface{}
@@ -39,5 +41,24 @@ func TestAuth_ServerHTTP(t *testing.T) {
 	want := http.StatusOK
 	if got != want {
 		t.Errorf("got %q, want %q", got, want)
+	}
+}
+
+func BenchmarkAuth_ServeHTTP(b *testing.B) {
+	var buffer bytes.Buffer
+
+	json.NewEncoder(&buffer).Encode(AuthRequest{Username: "test", Password: "123qweasd"})
+
+	req := httptest.NewRequest("GET", "/user/login", &buffer)
+	w := httptest.NewRecorder()
+
+	repo := mocks.NewUserRepo(b)
+	repo.On("FindByUsername", mock.Anything).Return(user.New("test", "123qweasd"), nil)
+	repo.On("Save", mock.Anything).Return()
+
+	handler := &Auth{Repo: repo}
+
+	for i := 0; i < b.N; i++ {
+		handler.ServeHTTP(w, req)
 	}
 }

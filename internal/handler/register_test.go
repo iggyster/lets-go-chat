@@ -8,6 +8,8 @@ import (
 	"testing"
 
 	"github.com/iggyster/lets-go-chat/internal/user"
+	"github.com/iggyster/lets-go-chat/mocks"
+	"github.com/stretchr/testify/mock"
 )
 
 func TestNewRegister(t *testing.T) {
@@ -66,5 +68,24 @@ func TestRegister_Validate(t *testing.T) {
 				t.Errorf("got %v, want %v", got, want)
 			}
 		})
+	}
+}
+
+func BenchmarkRegister_ServeHTTP(b *testing.B) {
+	var buffer bytes.Buffer
+
+	json.NewEncoder(&buffer).Encode(AuthRequest{Username: "test", Password: "123qweasd"})
+
+	req := httptest.NewRequest("GET", "/user", &buffer)
+	w := httptest.NewRecorder()
+
+	repo := mocks.NewUserRepo(b)
+	repo.On("IsExists", mock.Anything).Return(false)
+	repo.On("Save", mock.Anything).Return()
+
+	handler := &Register{Repo: repo}
+
+	for i := 0; i < b.N; i++ {
+		handler.ServeHTTP(w, req)
 	}
 }
